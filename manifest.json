@@ -1,12 +1,12 @@
 {
-  "name": "El Fede · Tu ring de productividad",
-  "short_name": "El Fede",
-  "description": "Task manager personal de El Fede",
+  "name": "Sotelo7 · Your Life in Balance",
+  "short_name": "Sotelo7",
+  "description": "Tus tareas y tus 7 pilares de vida, en equilibrio.",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#241A2E",
-  "theme_color": "#7B3FA0",
+  "background_color": "#1B5FC2",
+  "theme_color": "#1B5FC2",
   "icons": [
     {
       "src": "icon-192.png",
