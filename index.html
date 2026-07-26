@@ -11,6 +11,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{background:var(--fondo);min-height:100%;}
+/* Mientras se ve el login, el rebote del scroll muestra el degradado del login y no el tema */
+html.login-activo,body.login-activo{
+  background:linear-gradient(160deg,#0E3573 0%,#1B5FC2 55%,#3B82E8 100%);
+  background-attachment:fixed;
+}
+body.login-activo #login{background:transparent;}
 :root{
   /* superficies */
   --fondo:#F4F8FD; --papel:#FFFFFF; --linea:#D5E3F3; --linea-sf:#EDF3FA;
@@ -760,7 +767,7 @@ function aplicarFichas(t){
   document.body.classList.add("tema-"+t.id);
 
   const mt=document.querySelector('meta[name="theme-color"]');
-  if(mt)mt.setAttribute("content",t.header);
+  if(mt&&!document.body.classList.contains("login-activo"))mt.setAttribute("content",t.header);
 }
 /* compatibilidad: vista previa en vivo del selector de color */
 function aplicarColores(header,fondo){
@@ -830,7 +837,15 @@ async function login(){
   }catch(e){ m.innerHTML='<div class="msg msg-err">Error de conexion. Revisa la URL del script.</div>'; }
   finally{ ocultarProc(); }
 }
+/* El login manda sobre el fondo del documento y la barra de estado */
+function marcarPantallaLogin(activo){
+  document.documentElement.classList.toggle("login-activo",activo);
+  document.body.classList.toggle("login-activo",activo);
+  const mt=document.querySelector('meta[name="theme-color"]');
+  if(mt)mt.setAttribute("content", activo ? "#1B5FC2" : temaVigente().header);
+}
 function entrar(conRuleta){
+  marcarPantallaLogin(false);
   document.getElementById("login").classList.add("oculto");
   document.getElementById("app").classList.remove("oculto");
   aplicarTema();
@@ -852,6 +867,8 @@ function salir(){
   document.getElementById("app").classList.add("oculto");
   document.getElementById("login").classList.remove("oculto");
   document.getElementById("in-pass").value="";
+  marcarPantallaLogin(true);
+  window.scrollTo(0,0);
 }
 async function cargarTodo(){
   const r=await Promise.all([api("listarTareas"),api("listarPersonas"),api("dashboard",{dimension:DIM}),api("listarNotas"),api("listarListas"),api("listarPrefs")]);
@@ -2061,6 +2078,7 @@ window.addEventListener("load",function(){
   document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ cerrarMenu(); cerrarPanel(); } });
   const s=leerSesion();
   if(s){ TOKEN=s.token; entrar(true); }
+  else marcarPantallaLogin(true);
 });
 </script>
 </body>
