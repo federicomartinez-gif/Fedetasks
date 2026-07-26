@@ -703,7 +703,7 @@ function leerTema(){
   return temaPorId(t)?t:"essential";
 }
 function leerFondo(){ const f=gget("s7_fondo","nube"); return FONDOS[f]?f:"nube"; }
-const MAX_TEMAS=3;
+const MAX_TEMAS=4;
 /* Tus temas: hasta tres, cada uno con encabezado, fondo y acento. */
 function leerCustoms(){
   try{ const a=JSON.parse(gget("s7_customs","null")); if(Array.isArray(a))return a.slice(0,MAX_TEMAS); }catch(e){}
@@ -2043,7 +2043,7 @@ function abrirPanel(){
     }
   }
   h+='</div>';
-  h+='<div class="cupo-nota">Puedes guardar hasta '+MAX_TEMAS+' temas tuyos. Si los tres estan ocupados, al guardar uno nuevo eliges cual reemplazar.</div>';
+  h+='<div class="cupo-nota">Puedes guardar hasta '+MAX_TEMAS+' temas tuyos. Cuando esten todos ocupados, al guardar uno nuevo eliges cual reemplazar.</div>';
 
   if(id==="essential"){
     h+='<div class="sub">Fondo</div><div class="fondo-grid">';
@@ -2190,7 +2190,7 @@ function guardarTema(){
 }
 function pedirReemplazo(){
   const cs=leerCustoms();
-  let h='<div class="sub">Ya tienes tus '+MAX_TEMAS+' temas</div>'+
+  let h='<div class="sub">Ya tienes tus '+MAX_TEMAS+' temas guardados</div>'+
         '<div class="ayuda" style="margin-bottom:14px">Elige cual quieres reemplazar por <b>'+esc(edTema.nom)+'</b>.</div>'+
         '<div class="tema-lista">';
   for(let i=0;i<cs.length;i++){
