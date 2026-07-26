@@ -19,12 +19,15 @@
   --papel:#FFFFFF; --fondo:#F4F8FD;
   --ok:#1F8A5A; --ok-os:#15613F; --venc:#C62828; --hoy:#FFC220; --urg:#FF5A4A;
   --header-txt:#FFFFFF;
-  --r:16px; --tab-h:82px;
+  --r:16px; --tab-h:74px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.45;min-height:100vh;-webkit-font-smoothing:antialiased;}
 .oculto{display:none !important;}
 button{font-family:inherit;}
 input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--linea);border-radius:12px;font-size:16px;font-family:inherit;background:#fff;color:var(--texto);outline:none;transition:border-color .15s;}
+input[type="date"]{-webkit-appearance:none;appearance:none;display:block;min-height:49px;max-width:100%;}
+input[type="date"]::-webkit-date-and-time-value{text-align:left;margin:0;}
+input[type="date"]::-webkit-calendar-picker-indicator{margin-left:auto;}
 input:focus,select:focus,textarea:focus{border-color:var(--azul);}
 textarea{min-height:110px;resize:vertical;}
 select option:disabled{color:#B3C2D2;}
@@ -127,17 +130,18 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 
 /* ===== TAB BAR ===== */
 #tabbar{position:fixed;left:0;right:0;bottom:0;z-index:66;background:var(--papel);border-top:1px solid var(--linea);display:flex;align-items:flex-start;
-  padding:12px 4px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -3px 20px rgba(10,40,90,.08);}
-#tabbar button{flex:1;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;color:var(--gris);font-size:10.5px;font-weight:600;letter-spacing:.2px;padding:0;line-height:1;}
+  padding:10px 2px calc(12px + env(safe-area-inset-bottom));box-shadow:0 -3px 20px rgba(10,40,90,.08);}
+#tabbar button{flex:1;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;color:var(--gris);font-size:10px;font-weight:600;letter-spacing:.1px;padding:0;line-height:1;min-width:0;}
 #tabbar button .cara{height:30px;display:flex;align-items:center;justify-content:center;}
-#tabbar button i{font-size:24px;}
+#tabbar button i{font-size:23px;}
+#tabbar button span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
 #tabbar button.on{color:var(--azul);}
-#tabbar button .fotomini{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1.5px solid var(--linea);}
+#tabbar button .fotomini{width:25px;height:25px;border-radius:50%;object-fit:cover;border:1.5px solid var(--linea);}
 #tabbar button.on .fotomini{border-color:var(--azul);}
-/* Nueva tarea: mayor jerarquia */
-#tb-nueva{color:var(--azul);font-size:11.5px;font-weight:700;}
-#tb-nueva .cara{width:46px;height:46px;margin-top:-11px;border-radius:16px;background:var(--azul);color:#fff;box-shadow:0 6px 16px rgba(27,95,194,.32);}
-#tb-nueva i{font-size:27px;}
+/* Nueva tarea: mayor jerarquia, a la misma altura que el resto */
+#tb-nueva{color:var(--azul);font-size:10.5px;font-weight:700;}
+#tb-nueva .cara{width:54px;height:30px;border-radius:15px;background:var(--azul);color:#fff;box-shadow:0 3px 10px rgba(27,95,194,.28);}
+#tb-nueva i{font-size:22px;}
 #tb-nueva.on .cara{filter:brightness(1.08);}
 
 /* ===== TARJETAS ===== */
@@ -187,12 +191,12 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 .p-row:last-child{border-bottom:none;}
 .p-row .pn{flex:1;font-size:14.5px;font-weight:600;}
 .p-tipo{font-size:10.5px;background:var(--linea-sf);color:var(--azul);padding:3px 9px;border-radius:8px;font-weight:600;}
-.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;}
-.chips::-webkit-scrollbar{height:5px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;max-height:152px;overflow-y:auto;padding:3px;border:1.5px solid var(--linea);border-radius:14px;background:#fff;align-content:flex-start;}
+.chips::-webkit-scrollbar{width:5px;}
 .chips::-webkit-scrollbar-thumb{background:var(--linea);border-radius:4px;}
-.chip{cursor:pointer;padding:8px 14px;border-radius:11px;border:1.5px solid var(--linea);background:#fff;font-size:13px;font-weight:600;color:var(--texto);white-space:nowrap;flex-shrink:0;scroll-snap-align:start;}
+.chip{cursor:pointer;padding:9px 14px;border-radius:11px;border:1.5px solid var(--linea);background:#fff;font-size:13px;font-weight:600;color:var(--texto);white-space:nowrap;}
 .chip.sel{background:var(--azul);border-color:var(--azul);color:#fff;}
-.chips-nota{font-size:11.5px;color:var(--gris);margin:-4px 0 10px 2px;}
+.chips-nota{font-size:11.5px;color:var(--gris);margin:7px 0 0 2px;}
 
 /* ===== NOTAS ===== */
 .nota{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:14px;margin-bottom:10px;}
@@ -375,6 +379,7 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 
   <nav id="tabbar">
     <button id="tb-inicio" onclick="irInicio()"><span class="cara"><i class="ti ti-home"></i></span><span>Inicio</span></button>
+    <button id="tb-resumen" onclick="abrir('dashboard')"><span class="cara"><i class="ti ti-chart-donut"></i></span><span>Resumen</span></button>
     <button id="tb-nueva" onclick="abrir('nueva')"><span class="cara"><i class="ti ti-plus"></i></span><span>Nueva</span></button>
     <button id="tb-enfoque" onclick="abrir('enfoque')"><span class="cara"><i class="ti ti-clock-play"></i></span><span>Enfoque</span></button>
     <button id="tb-perfil" onclick="abrir('perfil')"><span class="cara" id="tb-foto"><i class="ti ti-user"></i></span><span>Perfil</span></button>
@@ -670,7 +675,8 @@ const ACCIONES=[
   {id:"nueva",nom:"Nueva tarea",ic:"circle-plus"},
   {id:"personas",nom:"Personas",ic:"users"},
   {id:"enfoque",nom:"Enfoque",ic:"clock-play"},
-  {id:"biblioteca",nom:"Biblioteca",ic:"book-2"}
+  {id:"biblioteca",nom:"Biblioteca",ic:"book-2"},
+  {id:"social",nom:"Social",ic:"world"}
 ];
 const F_TAREAS=[
   {id:"f-total",nom:"Todas",ic:"list-check",f:function(){ return tareasDim().filter(activa); }},
@@ -746,7 +752,7 @@ async function irADimension(id){
 }
 function irInicio(){ volver(); window.scrollTo({top:0,behavior:"smooth"}); marcarTab("tb-inicio"); }
 function marcarTab(id){
-  ["tb-inicio","tb-nueva","tb-enfoque","tb-perfil"].forEach(function(x){
+  ["tb-inicio","tb-resumen","tb-nueva","tb-enfoque","tb-perfil"].forEach(function(x){
     const b=document.getElementById(x); if(b)b.classList.toggle("on",x===id);
   });
 }
@@ -823,6 +829,7 @@ function abrir(id){
   else if(id==="personas")    pintarPersonas(b);
   else if(id==="enfoque")     pintarPomodoro(b);
   else if(id==="biblioteca")  pintarBiblioteca(b);
+  else if(id==="social")      pintarSocial(b);
   else if(id==="notas")       pintarNotas(b);
   else if(id==="listas")      pintarListas(b);
   else if(id==="perfil")      pintarPerfil(b);
@@ -835,6 +842,7 @@ function abrir(id){
   if(id==="nueva")marcarTab("tb-nueva");
   else if(id==="enfoque")marcarTab("tb-enfoque");
   else if(id==="perfil")marcarTab("tb-perfil");
+  else if(id==="dashboard")marcarTab("tb-resumen");
   else marcarTab("");
 }
 function volver(){
@@ -1055,7 +1063,7 @@ function chipsPersonas(seleccion){
     const on=sel.indexOf(p.nombre)!==-1;
     h+='<div class="chip'+(on?" sel":"")+'" data-nombre="'+esc(p.nombre)+'" onclick="this.classList.toggle(\'sel\')">'+esc(p.nombre)+'</div>';
   });
-  h+='</div><div class="chips-nota">Desliza para ver mas. Puedes elegir varias personas.</div>';
+  h+='</div><div class="chips-nota">Puedes elegir a varias personas.</div>';
   return h;
 }
 function leerChips(){
@@ -1509,8 +1517,8 @@ const LECCIONES=[
    fuente:""},
 
   {t:"SOTELO7",ic:"sparkles",acronimo:true,
-   entrada:"Seis verbos y un ritmo. Esto es lo que proponemos hacer con tu semana.",
-   fuente:"Presentamos primero el ingles porque es donde el acronimo se sostiene, y al lado su lectura en espanol. Cuando la plataforma llegue a otros idiomas, todos se colgaran de esta misma base."},
+   entrada:"Seis verbos que se sostienen entre si: quitar lo que sobra, poner orden, crecer, recuperar energia, vivir de verdad y afinar lo que ya funciona.",
+   fuente:"No hace falta hacerlos todos hoy. Basta con que ninguno se quede fuera de la semana."},
 
   {t:"Enfoque y energia",ic:"battery-3",
    entrada:"Antes de empezar, cada tarea responde tres preguntas. Las dos primeras son las de siempre. La tercera es la que casi nadie registra y la que lo cambia todo.",
@@ -1616,6 +1624,23 @@ function pintarLeccion(){
 }
 function lecSig(){ if(leccion<LECCIONES.length-1){ leccion++; pintarLeccion(); } }
 function lecAnt(){ if(leccion>0){ leccion--; pintarLeccion(); } }
+
+/* ---------- social (en construccion) ---------- */
+function pintarSocial(cont){
+  cont.innerHTML=
+    '<div class="elearn"><div class="ic">'+ico("world")+'</div>'+
+    '<h3>Social</h3>'+
+    '<div class="entrada">Aqui va a vivir el espacio compartido de Sotelo7: un lugar para publicar un pensamiento, una emocion o como va tu dia, y para ver lo que comparten tus contactos.</div>'+
+    '<div class="lec-lista">'+
+      '<div class="lec-it"><div class="bala"></div><div class="cont"><div class="tt">Poco y con intencion</div>'+
+        '<div class="dd">Un limite de publicaciones al dia, para que sea un lugar al que se vuelve, no uno del que cuesta salir.</div></div></div>'+
+      '<div class="lec-it"><div class="bala"></div><div class="cont"><div class="tt">Tus contactos</div>'+
+        '<div class="dd">Conexiones que se piden y se aceptan, con lo que compartes visible solo para ellos si asi lo decides.</div></div></div>'+
+      '<div class="lec-it"><div class="bala"></div><div class="cont"><div class="tt">Sin ruido</div>'+
+        '<div class="dd">Sin conteos que compiten, sin nada que empuje a quedarse mas tiempo del que querias.</div></div></div>'+
+    '</div>'+
+    '<div class="cierre">Estamos construyendolo. Vuelve pronto.</div></div>';
+}
 
 /* ---------- panel de temas + selector de color ---------- */
 let cpHSV={h:214,s:0.86,v:0.76}, cpDestino="header", cpPrevio=null;
