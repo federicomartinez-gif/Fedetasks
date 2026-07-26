@@ -19,7 +19,7 @@
   --papel:#FFFFFF; --fondo:#F4F8FD;
   --ok:#1F8A5A; --ok-os:#15613F; --venc:#C62828; --hoy:#FFC220; --urg:#FF5A4A;
   --header-txt:#FFFFFF;
-  --r:16px; --tab-h:62px;
+  --r:16px; --tab-h:82px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.45;min-height:100vh;-webkit-font-smoothing:antialiased;}
 .oculto{display:none !important;}
@@ -126,11 +126,19 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 .pt-body>*{max-width:760px;margin-left:auto;margin-right:auto;}
 
 /* ===== TAB BAR ===== */
-#tabbar{position:fixed;left:0;right:0;bottom:0;height:var(--tab-h);z-index:66;background:var(--papel);border-top:1px solid var(--linea);display:flex;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 16px rgba(10,40,90,.07);}
-#tabbar button{flex:1;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--gris);font-size:10px;font-weight:600;letter-spacing:.2px;padding:0;}
-#tabbar button i{font-size:22px;}
+#tabbar{position:fixed;left:0;right:0;bottom:0;z-index:66;background:var(--papel);border-top:1px solid var(--linea);display:flex;align-items:flex-start;
+  padding:12px 4px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -3px 20px rgba(10,40,90,.08);}
+#tabbar button{flex:1;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;color:var(--gris);font-size:10.5px;font-weight:600;letter-spacing:.2px;padding:0;line-height:1;}
+#tabbar button .cara{height:30px;display:flex;align-items:center;justify-content:center;}
+#tabbar button i{font-size:24px;}
 #tabbar button.on{color:var(--azul);}
-#tabbar button .fotomini{width:23px;height:23px;border-radius:50%;object-fit:cover;border:1.5px solid var(--linea);}
+#tabbar button .fotomini{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1.5px solid var(--linea);}
+#tabbar button.on .fotomini{border-color:var(--azul);}
+/* Nueva tarea: mayor jerarquia */
+#tb-nueva{color:var(--azul);font-size:11.5px;font-weight:700;}
+#tb-nueva .cara{width:46px;height:46px;margin-top:-11px;border-radius:16px;background:var(--azul);color:#fff;box-shadow:0 6px 16px rgba(27,95,194,.32);}
+#tb-nueva i{font-size:27px;}
+#tb-nueva.on .cara{filter:brightness(1.08);}
 
 /* ===== TARJETAS ===== */
 .card{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);padding:18px;margin-bottom:14px;}
@@ -216,18 +224,27 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 .est-btn{border:none;cursor:pointer;font-size:13px;font-weight:600;padding:11px;border-radius:11px;color:#fff;}
 
 /* ===== BIBLIOTECA ===== */
-.elearn{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:24px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;}
-.elearn .ic{height:56px;display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--azul);margin:0 auto 12px;}
-.elearn h3{font-size:19px;color:var(--azul);margin-bottom:11px;display:block;}
-.elearn p{font-size:14.5px;line-height:1.6;color:var(--texto);text-align:left;}
-.elearn .fuente{font-size:11.5px;color:var(--gris);margin-top:12px;font-style:italic;text-align:left;}
-.el-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;}
-.dots{display:flex;gap:5px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;}
+.elearn{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:26px 22px 22px;display:flex;flex-direction:column;}
+.elearn .ic{width:62px;height:62px;border-radius:20px;background:var(--linea-sf);display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--azul);margin:0 auto 14px;}
+.elearn h3{font-size:20px;color:var(--azul);margin-bottom:16px;display:block;text-align:center;letter-spacing:-.3px;line-height:1.25;}
+.elearn .entrada{font-size:15px;line-height:1.68;color:var(--texto);}
+.elearn .entrada+.lec-lista{margin-top:16px;}
+.lec-lista{display:flex;flex-direction:column;gap:11px;}
+.lec-it{display:flex;gap:11px;align-items:flex-start;}
+.lec-it .bala{width:9px;height:9px;border-radius:50%;background:var(--coral);flex-shrink:0;margin-top:7px;}
+.lec-it .num{width:22px;height:22px;border-radius:8px;background:var(--linea-sf);color:var(--azul-os);font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.lec-it .cont{flex:1;min-width:0;}
+.lec-it .tt{font-size:14.5px;font-weight:700;color:var(--texto);line-height:1.4;}
+.lec-it .dd{font-size:13.5px;color:var(--gris);line-height:1.55;margin-top:2px;}
+.elearn .cierre{font-size:14.5px;line-height:1.65;color:var(--texto);margin-top:16px;padding-top:14px;border-top:1px solid var(--linea-sf);}
+.elearn .fuente{font-size:12px;color:var(--gris);margin-top:16px;line-height:1.55;background:var(--linea-sf);border-radius:12px;padding:11px 13px;}
+.el-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--linea);}
 .dot.on{background:var(--azul);}
 .mini{border:none;cursor:pointer;padding:10px 17px;border-radius:11px;font-weight:600;color:#fff;font-size:14px;background:var(--azul);}
 .mini[disabled]{background:var(--linea);color:var(--gris);cursor:default;}
-.acronimo{display:grid;grid-template-columns:auto 1fr 1fr;gap:0;background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;margin:14px 0;}
+.acronimo{display:grid;grid-template-columns:auto 1fr 1fr;gap:0;background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;margin:16px 0 0;}
 .acronimo div{padding:9px 11px;font-size:13px;border-bottom:1px solid var(--linea-sf);}
 .acronimo .l{font-weight:800;color:var(--coral);text-align:center;background:var(--linea-sf);font-size:15px;}
 .acronimo .en{font-weight:700;color:var(--azul-os);}
@@ -357,10 +374,10 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
   <main class="wrap"><div id="cinta"></div><div id="zonas"></div></main>
 
   <nav id="tabbar">
-    <button id="tb-inicio" onclick="irInicio()"><i class="ti ti-home"></i><span>Inicio</span></button>
-    <button id="tb-nueva" onclick="abrir('nueva')"><i class="ti ti-circle-plus"></i><span>Nueva</span></button>
-    <button id="tb-enfoque" onclick="abrir('enfoque')"><i class="ti ti-clock-play"></i><span>Enfoque</span></button>
-    <button id="tb-perfil" onclick="abrir('perfil')"><span id="tb-foto"><i class="ti ti-user"></i></span><span>Perfil</span></button>
+    <button id="tb-inicio" onclick="irInicio()"><span class="cara"><i class="ti ti-home"></i></span><span>Inicio</span></button>
+    <button id="tb-nueva" onclick="abrir('nueva')"><span class="cara"><i class="ti ti-plus"></i></span><span>Nueva</span></button>
+    <button id="tb-enfoque" onclick="abrir('enfoque')"><span class="cara"><i class="ti ti-clock-play"></i></span><span>Enfoque</span></button>
+    <button id="tb-perfil" onclick="abrir('perfil')"><span class="cara" id="tb-foto"><i class="ti ti-user"></i></span><span>Perfil</span></button>
   </nav>
 </div>
 
@@ -1481,28 +1498,82 @@ const ACRONIMO=[
   {l:"O",en:"Optimize",  es:"Optimiza"}
 ];
 const LECCIONES=[
-  {t:"Por que siete dimensiones",ic:"layout-grid",p:
-   "En un dia normal tu mente recibe mucha mas informacion de la que puede sostener, y no respondes igual a todo: reaccionas distinto segun lo que se va presentando y segun con cuanta energia llegas a ese momento. Por eso en Sotelo7 no organizamos la vida en una sola lista interminable. Proponemos siete dimensiones, cada una con su propio espacio para tareas, notas y listas, mas una vista General que las concentra todas. Cuando cada cosa vive en su lugar, dejas de cargar el sistema completo en la cabeza y puedes atender una dimension a la vez.",
+  {t:"Por que siete dimensiones",ic:"layout-grid",
+   entrada:"En un dia normal tu mente recibe mucha mas informacion de la que puede sostener, y no respondes igual a todo: reaccionas distinto segun lo que se va presentando y segun con cuanta energia llegas a ese momento.",
+   lista:[
+     {tt:"Una sola lista no alcanza",dd:"Cuando todo vive junto, cada vez que abres la aplicacion cargas el sistema completo en la cabeza."},
+     {tt:"Siete espacios propios",dd:"Cada dimension tiene sus tareas, sus notas y sus listas, y su propio resumen."},
+     {tt:"Una vista que lo concentra",dd:"General guarda lo que no clasificaste y ademas suma todo lo de las otras siete."}
+   ],
+   cierre:"Cuando cada cosa vive en su lugar puedes atender una dimension a la vez, sin perder de vista el conjunto.",
    fuente:""},
-  {t:"El acronimo",ic:"sparkles",p:"ACRONIMO",fuente:
-   "El nombre viene del apellido Sotelo y del siete: siete dimensiones, siete dias. Presentamos primero el ingles porque es donde el acronimo se sostiene, y al lado su lectura en espanol. Cuando la plataforma llegue a otros idiomas, todos se colgaran de esta misma base."},
-  {t:"Enfoque y energia",ic:"battery-3",p:
-   "Cada tarea tiene dos preguntas antes de empezar: en que dimension de tu vida vive, y con que enfoque conviene atacarla. A eso le sumamos un tercer dato que casi nadie registra y que lo cambia todo: cuanta energia pide. Hay trabajo que solo sale bien con la cabeza fresca y hay trabajo que se puede despachar cansado. Registrar la energia te permite elegir la tarea correcta para el momento correcto, en lugar de pelearte con la lista.",
+
+  {t:"SOTELO7",ic:"sparkles",acronimo:true,
+   entrada:"Seis verbos y un ritmo. Esto es lo que proponemos hacer con tu semana.",
+   fuente:"Presentamos primero el ingles porque es donde el acronimo se sostiene, y al lado su lectura en espanol. Cuando la plataforma llegue a otros idiomas, todos se colgaran de esta misma base."},
+
+  {t:"Enfoque y energia",ic:"battery-3",
+   entrada:"Antes de empezar, cada tarea responde tres preguntas. Las dos primeras son las de siempre. La tercera es la que casi nadie registra y la que lo cambia todo.",
+   lista:[
+     {n:"1",tt:"En que dimension vive",dd:"Donde pertenece dentro de tu vida, no solo dentro de tu trabajo."},
+     {n:"2",tt:"Con que enfoque conviene atacarla",dd:"No toda tarea se resuelve igual. Cada enfoque sirve para un tipo distinto de pendiente."},
+     {n:"3",tt:"Cuanta energia pide",dd:"Hay trabajo que solo sale bien con la cabeza fresca y hay trabajo que se puede despachar cansado."}
+   ],
+   cierre:"Registrar la energia te permite elegir la tarea correcta para el momento correcto, en lugar de pelearte con la lista.",
    fuente:""},
-  {t:"Primero lo dificil",ic:"mountain",p:
-   "Lo mas pesado del dia se hace temprano, con la cabeza descansada y antes de que aparezcan las excusas. Si dejas esa tarea para la tarde, vas a cargarla mentalmente durante horas y probablemente termine rodando al dia siguiente. Nuestra propuesta es simple: identifica la tarea que mas te esta costando y hazla primero. El resto del dia se siente cuesta abajo.",
+
+  {t:"Primero lo dificil",ic:"mountain",
+   entrada:"Lo mas pesado del dia se hace temprano, con la cabeza descansada y antes de que aparezcan las excusas.",
+   lista:[
+     {tt:"Identifica lo que mas te cuesta",dd:"Casi siempre ya sabes cual es. Es la que llevas dias rodando."},
+     {tt:"Hazla primero",dd:"Antes del correo, antes de las llamadas, antes de lo que se siente comodo."},
+     {tt:"El resto se acomoda solo",dd:"Si la dejas para la tarde vas a cargarla mentalmente durante horas."}
+   ],
+   cierre:"",
    fuente:"Este enfoque se inspira en el trabajo sobre productividad personal de Brian Tracy."},
-  {t:"Mente despejada",ic:"brain",p:
-   "Tu cabeza sirve para pensar, no para almacenar. Cuando los pendientes viven solo en la memoria, vuelven una y otra vez y consumen atencion aunque no puedas hacer nada con ellos en ese momento. La propuesta es sacar todo del pensamiento y ponerlo en un sistema confiable, y para cada pendiente definir cual es la siguiente accion concreta. Funciona especialmente bien en proyectos con muchas partes.",
+
+  {t:"Mente despejada",ic:"brain",
+   entrada:"Tu cabeza sirve para pensar, no para almacenar. Cuando los pendientes viven solo en la memoria vuelven una y otra vez y consumen atencion aunque no puedas hacer nada con ellos en ese momento.",
+   lista:[
+     {tt:"Sacalo todo del pensamiento",dd:"Si esta en tu cabeza y no en el sistema, va a seguir pesando."},
+     {tt:"Ponlo en un lugar confiable",dd:"El sistema solo funciona si de verdad confias en que nada se pierde ahi."},
+     {tt:"Define la siguiente accion",dd:"No basta con anotar el proyecto. Anota el proximo paso concreto."}
+   ],
+   cierre:"Funciona especialmente bien cuando llevas varios frentes abiertos al mismo tiempo.",
    fuente:"Este enfoque se inspira en el sistema de organizacion personal desarrollado por David Allen."},
-  {t:"Las seis del dia",ic:"list-numbers",p:
-   "Al terminar el dia escribes las seis tareas que de verdad importan para manana, ordenadas por prioridad. Al dia siguiente trabajas la primera hasta terminarla, luego la segunda, sin saltar. El limite es lo que le da fuerza: seis en todo el sistema, sin importar de que dimension vengan. Si ya tienes seis y quieres agregar otra, Sotelo7 te pedira que elijas otro enfoque, porque una septima prioridad ya no es una prioridad.",
+
+  {t:"Las seis del dia",ic:"list-numbers",
+   entrada:"Al terminar el dia escribes las seis tareas que de verdad importan para manana, ordenadas por prioridad.",
+   lista:[
+     {n:"1",tt:"Seis, ni una mas",dd:"El limite es global en todo Sotelo7, sin importar de que dimension vengan."},
+     {n:"2",tt:"En orden de prioridad",dd:"Trabajas la primera hasta terminarla, luego la segunda. Sin saltar."},
+     {n:"3",tt:"Si estan llenas, elige otro enfoque",dd:"Una septima prioridad ya no es una prioridad."}
+   ],
+   cierre:"Completar una libera su lugar y las demas recorren su posicion automaticamente.",
    fuente:"Metodo propuesto por Ivy Lee en la decada de 1920 para Bethlehem Steel."},
-  {t:"Concentrado",ic:"target",p:
-   "Correos, llamadas, tramites, cosas menores que por si solas no valen un lugar en tus seis pero que acumuladas se vuelven un peso real. Aqui van agrupadas para despacharlas juntas en un solo bloque del dia, en lugar de dejarlas interrumpiendo el trabajo importante cada quince minutos. Agrupar lo pequeno es lo que protege lo grande.",
+
+  {t:"Concentrado",ic:"target",
+   entrada:"Correos, llamadas, tramites. Cosas menores que por si solas no valen un lugar en tus seis, pero que acumuladas se vuelven un peso real.",
+   lista:[
+     {tt:"Agrupalas",dd:"En lugar de atenderlas conforme llegan, dejalas juntarse."},
+     {tt:"Dales un bloque del dia",dd:"Un momento fijo para despacharlas todas seguidas."},
+     {tt:"Protege lo importante",dd:"Cada interrupcion te cuesta mucho mas que el minuto que dura."}
+   ],
+   cierre:"Agrupar lo pequeno es lo que protege lo grande.",
    fuente:""},
-  {t:"Las siete dimensiones",ic:"circles",p:
-   "Salud y bienestar: ejercicio, descanso, alimentacion y recreacion. Familia y relaciones: pareja, hijos, amistades y vida social. Hogar: compras, limpieza, mantenimiento y organizacion. Trabajo y profesion: empleo, negocio, proyectos y desarrollo profesional. Finanzas: pagos, presupuesto, ahorro e inversiones. Aprendizaje y crecimiento: estudios, cursos, lectura y desarrollo personal. Espiritualidad y proposito: fe, oracion, reflexion, servicio y sentido de vida. Una vida en equilibrio se sostiene en las siete, no en una sola.",
+
+  {t:"Las siete dimensiones",ic:"circles",
+   entrada:"",
+   lista:[
+     {tt:"Salud y bienestar",dd:"Ejercicio, descanso, alimentacion y recreacion."},
+     {tt:"Familia y relaciones",dd:"Pareja, hijos, amistades y vida social."},
+     {tt:"Hogar",dd:"Compras, limpieza, mantenimiento y organizacion."},
+     {tt:"Trabajo y profesion",dd:"Empleo, negocio, proyectos y desarrollo profesional."},
+     {tt:"Finanzas",dd:"Pagos, presupuesto, ahorro e inversiones."},
+     {tt:"Aprendizaje y crecimiento",dd:"Estudios, cursos, lectura y desarrollo personal."},
+     {tt:"Espiritualidad y proposito",dd:"Fe, oracion, reflexion, servicio y sentido de vida."}
+   ],
+   cierre:"Una vida en equilibrio se sostiene en las siete, no en una sola.",
    fuente:""}
 ];
 let leccion=0;
@@ -1513,19 +1584,35 @@ function acronimoHTML(){
   return h;
 }
 function pintarBiblioteca(cont){ cont.innerHTML='<div id="el-cont"></div>'; pintarLeccion(); }
+function listaHTML(items){
+  if(!items||!items.length)return "";
+  let h='<div class="lec-lista">';
+  items.forEach(function(i){
+    const marca = i.n ? '<div class="num">'+esc(i.n)+'</div>' : '<div class="bala"></div>';
+    h+='<div class="lec-it">'+marca+'<div class="cont"><div class="tt">'+esc(i.tt)+'</div>'+
+       (i.dd?'<div class="dd">'+esc(i.dd)+'</div>':"")+'</div></div>';
+  });
+  return h+'</div>';
+}
 function pintarLeccion(){
   const L=LECCIONES[leccion], c=document.getElementById("el-cont");
   if(!c)return;
   let d="";
   LECCIONES.forEach(function(x,i){ d+='<div class="dot'+(i===leccion?" on":"")+'"></div>'; });
-  const cuerpo = L.p==="ACRONIMO" ? acronimoHTML() : '<p>'+esc(L.p)+'</p>';
-  c.innerHTML='<div class="elearn"><div><div class="ic">'+ico(L.ic)+'</div><h3>'+esc(L.t)+'</h3>'+cuerpo+
-    (L.fuente?'<div class="fuente">'+esc(L.fuente)+'</div>':"")+'</div>'+
-    '<div><div class="dots">'+d+'</div><div class="el-nav">'+
+
+  let cuerpo="";
+  if(L.entrada)cuerpo+='<div class="entrada">'+esc(L.entrada)+'</div>';
+  if(L.acronimo)cuerpo+=acronimoHTML();
+  cuerpo+=listaHTML(L.lista);
+  if(L.cierre)cuerpo+='<div class="cierre">'+esc(L.cierre)+'</div>';
+  if(L.fuente)cuerpo+='<div class="fuente">'+esc(L.fuente)+'</div>';
+
+  c.innerHTML='<div class="elearn"><div class="ic">'+ico(L.ic)+'</div><h3>'+esc(L.t)+'</h3>'+cuerpo+
+    '<div class="dots">'+d+'</div><div class="el-nav">'+
     '<button class="mini"'+(leccion===0?" disabled":"")+' onclick="lecAnt()">Anterior</button>'+
     '<span style="font-size:12px;color:var(--gris)">'+(leccion+1)+' de '+LECCIONES.length+'</span>'+
     '<button class="mini"'+(leccion===LECCIONES.length-1?" disabled":"")+' onclick="lecSig()">Siguiente</button>'+
-    '</div></div></div>';
+    '</div></div>';
 }
 function lecSig(){ if(leccion<LECCIONES.length-1){ leccion++; pintarLeccion(); } }
 function lecAnt(){ if(leccion>0){ leccion--; pintarLeccion(); } }
