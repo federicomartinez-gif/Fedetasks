@@ -446,6 +446,72 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 .cel-sub{font-size:14px;color:var(--gris);line-height:1.5;}
 .cel-chispa{position:absolute;width:9px;height:9px;border-radius:50%;opacity:0;}
 @keyframes chispa{0%{opacity:0;transform:translate(0,0) scale(.4);}30%{opacity:1;}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.15);}}
+/* ===================== NUEVO EN v10 ===================== */
+
+/* --- Dialogo de confirmacion (hoja inferior) --- */
+#dialogo{position:fixed;inset:0;z-index:400;background:rgba(10,22,38,.5);display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px);}
+#dialogo .dlg{background:var(--papel);width:100%;max-width:460px;border-radius:22px 22px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(10,22,38,.28);animation:dlgSube .22s cubic-bezier(.22,1,.36,1);}
+@media(min-width:560px){#dialogo{align-items:center;}#dialogo .dlg{border-radius:22px;animation:dlgPop .2s ease-out;}}
+@keyframes dlgSube{from{transform:translateY(100%);}to{transform:translateY(0);}}
+@keyframes dlgPop{from{transform:scale(.94);opacity:0;}to{transform:scale(1);opacity:1;}}
+#dialogo .dlg-ic{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;background:var(--linea-sf);color:var(--azul);}
+#dialogo .dlg-ic.peligro{background:rgba(255,90,74,.14);color:var(--coral);}
+#dialogo h4{font-size:19px;font-weight:var(--peso-tit);text-align:center;margin-bottom:7px;color:var(--texto);}
+#dialogo p{font-size:14px;color:var(--gris);text-align:center;line-height:1.55;margin-bottom:20px;}
+#dialogo .dlg-btns{display:flex;flex-direction:column;gap:9px;}
+#dialogo .dlg-btns .btn{width:100%;}
+
+/* --- Aviso generico (guardado / pendiente) --- */
+.av-card{background:var(--papel);border-radius:24px;padding:30px 26px;text-align:center;box-shadow:0 18px 50px rgba(10,22,38,.24);max-width:310px;position:relative;animation:avPop .3s cubic-bezier(.22,1,.36,1);}
+@keyframes avPop{from{transform:scale(.86);opacity:0;}to{transform:scale(1);opacity:1;}}
+.av-ic{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 15px;animation:avLate .55s cubic-bezier(.34,1.56,.64,1);}
+@keyframes avLate{0%{transform:scale(.5) translateY(-16px);opacity:0;}60%{transform:scale(1.1) translateY(0);opacity:1;}100%{transform:scale(1);}}
+.av-onda{position:absolute;left:50%;top:52px;width:74px;height:74px;margin-left:-37px;border-radius:50%;border:2.5px solid var(--azul-cl);opacity:0;animation:avOnda 1.1s ease-out .18s;}
+@keyframes avOnda{0%{transform:scale(.6);opacity:.75;}100%{transform:scale(2.1);opacity:0;}}
+.av-txt{font-size:21px;font-weight:var(--peso-tit);color:var(--texto);margin-bottom:6px;}
+.av-sub{font-size:14px;color:var(--gris);line-height:1.5;}
+
+/* --- Zonas plegables --- */
+.zona-tit{cursor:pointer;user-select:none;}
+.zona-tit .ct-z{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--azul-os);background:var(--linea-sf);padding:2px 9px;border-radius:9px;}
+.zona-tit .chv{display:flex;align-items:center;color:var(--gris);font-size:18px;transition:transform .2s;margin-left:8px;}
+.zona.plegada .zona-tit .chv{transform:rotate(-90deg);}
+.zona-cpo{overflow:hidden;transition:opacity .18s;}
+.zona.plegada .zona-cpo{display:none;}
+
+/* --- Botones de mover en tareas --- */
+.mover{display:grid;grid-template-columns:repeat(2,26px);gap:3px;flex-shrink:0;align-self:center;}
+.mv-btn{border:1px solid var(--linea);background:var(--papel);color:var(--azul);width:26px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:background .12s,opacity .12s;padding:0;}
+.mv-btn:hover:not(:disabled){background:var(--linea-sf);}
+.mv-btn:disabled{opacity:.28;cursor:default;}
+.mv-btn i{line-height:1;}
+.tarea .cuerpo{min-width:0;}
+
+/* --- Drawer: proyectos y orden --- */
+.dw-rot{position:relative;}
+.dw-rot .dw-acc{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:5px;}
+.dw-rot .dw-acc button{border:none;background:var(--linea-sf);color:var(--azul);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
+.dw-item .mv{display:flex;flex-direction:column;gap:2px;margin-left:6px;}
+.dw-item .mv button{border:none;background:transparent;color:var(--gris);width:20px;height:15px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border-radius:5px;}
+.dw-item .mv button:hover{background:var(--linea);}
+.dw-item .mv button:disabled{opacity:.22;}
+.dw-sep{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gris);padding:14px 16px 6px;}
+
+/* --- Acordeon de contenido (biblioteca / bienvenida) --- */
+.acor{border:1px solid var(--linea);border-radius:16px;background:var(--papel);margin-bottom:11px;overflow:hidden;}
+.acor-tit{display:flex;align-items:center;gap:11px;padding:15px 16px;cursor:pointer;user-select:none;}
+.acor-tit .ic{width:34px;height:34px;border-radius:11px;background:var(--linea-sf);color:var(--azul);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.acor-tit .nm{flex:1;font-size:15px;font-weight:600;min-width:0;}
+.acor-tit .nm .sb{font-size:12px;font-weight:500;color:var(--gris);margin-top:2px;}
+.acor-tit .chv{color:var(--gris);font-size:19px;transition:transform .2s;}
+.acor.abierto .acor-tit .chv{transform:rotate(90deg);}
+.acor-cpo{display:none;padding:0 16px 16px;border-top:1px solid var(--linea-sf);padding-top:14px;}
+.acor.abierto .acor-cpo{display:block;}
+
+/* --- Perfil: dimensiones clicables --- */
+.p-row.p-link{cursor:pointer;border-radius:11px;padding:11px 9px;margin:0 -9px;transition:background .13s;}
+.p-row.p-link:hover{background:var(--linea-sf);}
+.p-row .p-chv{color:var(--gris);font-size:17px;display:flex;align-items:center;}
 </style>
 </head>
 <body>
@@ -470,7 +536,7 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
     <div class="hdr-acc">
       <button class="hdr-ib" id="btn-son" onclick="alternarSonido()" aria-label="Sonido"><i class="ti ti-volume-off"></i></button>
       <button class="hdr-ib" onclick="abrirPanel()" aria-label="Tema"><i class="ti ti-palette"></i></button>
-      <button class="hdr-ib" onclick="salir()" aria-label="Salir"><i class="ti ti-logout"></i></button>
+      <button class="hdr-ib" onclick="pedirSalir()" aria-label="Salir"><i class="ti ti-logout"></i></button>
     </div>
   </header>
 
@@ -480,9 +546,9 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
     <div class="dw-top">
       <div class="m" id="dw-mark"></div>
       <h2>Sotelo7</h2>
-      <p>Your Life in Balance</p>
+      <p>Your Life in Balance &middot; v10</p>
     </div>
-    <div class="dw-rot">Dimensiones</div>
+    <div class="dw-rot">Dimensiones<span class="dw-acc" id="dw-acc"></span></div>
     <div class="dw-nav" id="dw-nav"></div>
     <div class="dw-pie">Simplify &middot; Organize &middot; Thrive &middot; Energize &middot; Live &middot; Optimize<br>Seven days a week</div>
   </nav>
@@ -509,6 +575,7 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 <div id="giro"><div class="m"></div></div>
 <div id="procesando" class="oculto"><div class="sp"></div></div>
 <div id="celebra" class="oculto"></div>
+<div id="dialogo" class="oculto"></div>
 
 <div id="panel" class="oculto" onclick="if(event.target===this)cerrarPanel()">
   <div class="sheet">
@@ -534,7 +601,7 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 <input type="file" id="in-foto" accept="image/*" class="oculto" onchange="subirFoto(this)">
 
 <script>
-/* ============ SOTELO7 · app.js (v9) ============ */
+/* ============ SOTELO7 · app.js (v10) ============ */
 const API_URL = "https://script.google.com/macros/s/AKfycbxU2mXjM8sGaMsPLEIim4Tq9tuc-5S6iCZdX9JQkWP1klpl7BLf-d9N_8h5kTZxxDT74g/exec";
 const SESION_HORAS = 12;
 const LIMITE_SEIS = 6;
@@ -555,8 +622,9 @@ function esProxima(t){ return !!t.vencimiento && activa(t) && t.vencimiento>hoyS
 function esUrgente(t){ return norm(t.urgente).charAt(0)==="s"; }
 function ico(n){ return '<i class="ti ti-'+n+'"></i>'; }
 
-/* ---------- dimensiones ---------- */
-const DIMENSIONES=[
+/* ---------- dimensiones y proyectos ---------- */
+const MAX_PROYECTOS = 12;
+const DIM_BASE=[
   {id:"General",       ic:"layout-grid", desc:"Todo junto. Lo que no clasificaste y el resumen de las siete."},
   {id:"Salud",         ic:"heartbeat",   desc:"Ejercicio, descanso, alimentacion y recreacion."},
   {id:"Relaciones",    ic:"users",       desc:"Pareja, hijos, amistades y vida social."},
@@ -566,6 +634,40 @@ const DIMENSIONES=[
   {id:"Aprendizaje",   ic:"book-2",      desc:"Estudios, cursos, lectura y desarrollo personal."},
   {id:"Espiritualidad",ic:"sparkles",    desc:"Fe, oracion, reflexion, servicio y sentido de vida."}
 ];
+const ICONOS_PROY=["folder","target-arrow","rocket","building-store","plane","heart-handshake","code","palette","car","school","gift","seeding"];
+
+let PROYECTOS=[];              /* [{id,ic,desc}] creados por ti */
+let DIMENSIONES=DIM_BASE.slice();
+
+/* Lee proyectos y orden desde PREFS y arma el catalogo vigente. */
+function recalcDims(){
+  PROYECTOS=[];
+  try{
+    const a=JSON.parse(PREFS["dims:extra"]||"[]");
+    if(Array.isArray(a))PROYECTOS=a.filter(function(p){ return p&&p.id; }).slice(0,MAX_PROYECTOS);
+  }catch(e){}
+
+  const base=DIM_BASE.slice(1);                 /* sin General */
+  const todas=base.concat(PROYECTOS);
+
+  let orden=[];
+  try{ const o=JSON.parse(PREFS["dims:orden"]||"[]"); if(Array.isArray(o))orden=o; }catch(e){}
+
+  let lista;
+  if(orden.length){
+    lista=[];
+    orden.forEach(function(id){
+      const d=todas.find(function(x){ return igual(x.id,id); });
+      if(d&&lista.indexOf(d)===-1)lista.push(d);
+    });
+    todas.forEach(function(d){ if(lista.indexOf(d)===-1)lista.push(d); });
+  } else {
+    lista=todas.slice().sort(function(a,b){ return norm(a.id).localeCompare(norm(b.id)); });
+  }
+  DIMENSIONES=[DIM_BASE[0]].concat(lista);
+  if(!DIMENSIONES.some(function(d){ return igual(d.id,DIM); }))DIM="General";
+}
+function esProyecto(id){ return PROYECTOS.some(function(p){ return igual(p.id,id); }); }
 function dimInfo(id){ return DIMENSIONES.find(function(d){ return igual(d.id,id||"General"); }) || DIMENSIONES[0]; }
 function esGeneral(){ return igual(DIM,"General"); }
 function enDim(x){ return esGeneral() ? true : igual(x.dimension||"General", DIM); }
@@ -636,6 +738,122 @@ function gget(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:v; }c
 function guardarSesion(t){ gset("s7_sesion",JSON.stringify({token:t,exp:Date.now()+SESION_HORAS*3600*1000})); }
 function leerSesion(){ try{ const s=JSON.parse(gget("s7_sesion","null")); if(s&&s.exp>Date.now())return s; }catch(e){} return null; }
 function borrarSesion(){ try{ localStorage.removeItem("s7_sesion"); }catch(e){} }
+
+/* ---------- dialogo de confirmacion ---------- */
+/* Uso:  if(await confirmar({titulo:"...", texto:"...", ok:"Si", peligro:true})) ... */
+let _dlgCerrar=null;
+function confirmar(o){
+  o=o||{};
+  return new Promise(function(resolve){
+    const d=document.getElementById("dialogo");
+    const cerrar=function(v){
+      d.classList.add("oculto"); d.innerHTML=""; _dlgCerrar=null;
+      document.removeEventListener("keydown",tecla);
+      resolve(v);
+    };
+    const tecla=function(e){ if(e.key==="Escape")cerrar(false); };
+    _dlgCerrar=function(){ cerrar(false); };
+
+    d.innerHTML='<div class="dlg">'+
+      '<div class="dlg-ic'+(o.peligro?" peligro":"")+'">'+ico(o.ic||(o.peligro?"alert-triangle":"help-circle"))+'</div>'+
+      '<h4>'+esc(o.titulo||"Confirmar")+'</h4>'+
+      (o.texto?'<p>'+esc(o.texto)+'</p>':'<p></p>')+
+      '<div class="dlg-btns">'+
+        '<button class="btn '+(o.peligro?"btn-coral":"btn-primario")+'" id="dlg-ok">'+esc(o.ok||"Continuar")+'</button>'+
+        '<button class="btn btn-borde" id="dlg-no">'+esc(o.cancelar||"Cancelar")+'</button>'+
+      '</div></div>';
+    d.classList.remove("oculto");
+    d.onclick=function(e){ if(e.target===d)cerrar(false); };
+    document.getElementById("dlg-ok").onclick=function(){ cerrar(true); };
+    document.getElementById("dlg-no").onclick=function(){ cerrar(false); };
+    document.addEventListener("keydown",tecla);
+    setTimeout(function(){ const b=document.getElementById("dlg-ok"); if(b)b.focus(); },60);
+  });
+}
+/* Pide un texto corto. Devuelve el texto o null. */
+function pedirTexto(o){
+  o=o||{};
+  return new Promise(function(resolve){
+    const d=document.getElementById("dialogo");
+    const cerrar=function(v){ d.classList.add("oculto"); d.innerHTML=""; document.removeEventListener("keydown",tecla); resolve(v); };
+    const tecla=function(e){ if(e.key==="Escape")cerrar(null); };
+    d.innerHTML='<div class="dlg">'+
+      '<div class="dlg-ic">'+ico(o.ic||"pencil")+'</div>'+
+      '<h4>'+esc(o.titulo||"Escribe")+'</h4>'+
+      (o.texto?'<p>'+esc(o.texto)+'</p>':"")+
+      '<input type="text" id="dlg-in" placeholder="'+esc(o.placeholder||"")+'" value="'+esc(o.valor||"")+'" maxlength="28" style="margin-bottom:16px">'+
+      '<div class="dlg-btns">'+
+        '<button class="btn btn-primario" id="dlg-ok">'+esc(o.ok||"Guardar")+'</button>'+
+        '<button class="btn btn-borde" id="dlg-no">Cancelar</button>'+
+      '</div></div>';
+    d.classList.remove("oculto");
+    d.onclick=function(e){ if(e.target===d)cerrar(null); };
+    const inp=document.getElementById("dlg-in");
+    const aceptar=function(){ const v=inp.value.trim(); cerrar(v||null); };
+    document.getElementById("dlg-ok").onclick=aceptar;
+    document.getElementById("dlg-no").onclick=function(){ cerrar(null); };
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter")aceptar(); });
+    document.addEventListener("keydown",tecla);
+    setTimeout(function(){ inp.focus(); },70);
+  });
+}
+
+/* ---------- memoria de navegacion ---------- */
+/* Guarda donde estabas para regresar exactamente ahi. */
+function guardarUbicacion(){
+  if(!TOKEN)return;
+  const u={dim:DIM, sec:SECCION_ACTUAL, lista:LISTA_ACTUAL,
+           fila:(TAREA_ACTUAL?TAREA_ACTUAL.fila:null),
+           scroll:window.scrollY||0, t:Date.now()};
+  gset("s7_donde",JSON.stringify(u));
+}
+function leerUbicacion(){
+  try{
+    const u=JSON.parse(gget("s7_donde","null"));
+    if(u&&u.t&&(Date.now()-u.t)<SESION_HORAS*3600*1000)return u;
+  }catch(e){}
+  return null;
+}
+function olvidarUbicacion(){ try{ localStorage.removeItem("s7_donde"); }catch(e){} }
+/* Vuelve al punto exacto donde estabas la vez pasada. */
+function restaurarUbicacion(){
+  const u=leerUbicacion(); if(!u)return false;
+  if(u.dim&&DIMENSIONES.some(function(d){ return igual(d.id,u.dim); })){
+    DIM=u.dim; construir();
+  }
+  if(u.scroll)setTimeout(function(){ window.scrollTo(0,u.scroll); },40);
+  if(!u.sec)return false;
+  try{
+    if(u.sec==="lista-detalle"&&u.lista)abrirLista(u.lista);
+    else if(u.sec==="detalle"&&u.fila)abrirDetalle(u.fila);
+    else if(TODAS.some(function(x){ return x.id===u.sec; })||
+            ["notas","listas","perfil"].indexOf(u.sec)!==-1) abrir(u.sec,true);
+    else return false;
+    return true;
+  }catch(e){ return false; }
+}
+
+/* ---------- avisos motivadores ---------- */
+const AV_GUARDADA=["Ya esta fuera de tu cabeza.","Lo que se escribe deja de pesar en la memoria.","Capturado. Ahora si, a lo que sigue.","Anotado. Tu dia acaba de ganar claridad.","Queda registrado. Confia en el sistema, no en la memoria."];
+const AV_PENDIENTE=["Dejarla en proceso tambien es avanzar.","Empezar ya cuenta. Lo demas es continuidad.","Sigue viva y va contigo.","Un paso dado. Manana continua.","No todo se cierra hoy, y esta bien."];
+const AV_TIPOS={
+  guardada:{ic:"bookmark",titulo:"Anotado",color:"var(--azul)",fondo:"var(--linea-sf)",frases:AV_GUARDADA},
+  pendiente:{ic:"progress",titulo:"En marcha",color:"var(--sol-os)",fondo:"rgba(255,194,32,.16)",frases:AV_PENDIENTE}
+};
+function avisar(tipo){
+  const cfg=AV_TIPOS[tipo]; if(!cfg)return;
+  const c=document.getElementById("celebra");
+  const frase=cfg.frases[Math.floor(Math.random()*cfg.frases.length)];
+  c.innerHTML='<div class="av-card"><span class="av-onda" style="border-color:'+cfg.color+'"></span>'+
+    '<div class="av-ic" style="background:'+cfg.fondo+';color:'+cfg.color+'">'+ico(cfg.ic)+'</div>'+
+    '<div class="av-txt">'+esc(cfg.titulo)+'</div>'+
+    '<div class="av-sub">'+esc(frase)+'</div></div>';
+  c.classList.remove("oculto");
+  beep(1);
+  clearTimeout(window._celt);
+  window._celt=setTimeout(function(){ c.classList.add("oculto"); },1700);
+  c.onclick=function(){ c.classList.add("oculto"); };
+}
 
 /* ---------- temas ---------- */
 const FONDOS={
@@ -878,7 +1096,11 @@ function entrar(conRuleta){
   document.getElementById("login").classList.add("oculto");
   document.getElementById("app").classList.remove("oculto");
   aplicarTema();
-  cargarTodo().then(function(){ sincronizarTema(); construir(); if(conRuleta)abrirRuleta(); });
+  cargarTodo().then(function(){
+    sincronizarTema(); construir();
+    const volvio=restaurarUbicacion();
+    if(conRuleta&&!volvio)abrirRuleta();
+  });
 }
 /* El tema vive en la hoja, asi te sigue en cualquier dispositivo. */
 function sincronizarTema(){
@@ -891,7 +1113,16 @@ function sincronizarTema(){
   if(f && FONDOS[f] && f!==leerFondo()){ gset("s7_fondo",f); cambio=true; }
   if(cambio)aplicarTema();
 }
+async function pedirSalir(){
+  const si=await confirmar({
+    titulo:"Cerrar sesion?",
+    texto:"Tus tareas, listas y notas siguen guardadas en la nube. Vas a volver a la pantalla de entrada.",
+    ok:"Cerrar sesion", cancelar:"Seguir aqui", ic:"logout", peligro:true
+  });
+  if(si)salir();
+}
 function salir(){
+  guardarUbicacion();
   TOKEN=null; borrarSesion(); cerrarMenu(); volver();
   document.getElementById("app").classList.add("oculto");
   document.getElementById("login").classList.remove("oculto");
@@ -907,6 +1138,7 @@ async function cargarTodo(){
   NOTAS    = r[3]&&r[3].ok ? r[3].notas    : [];
   LISTAS   = r[4]&&r[4].ok ? r[4].listas   : [];
   PREFS    = r[5]&&r[5].ok ? r[5].prefs    : PREFS;
+  recalcDims();
   pintarFotoMini();
 }
 function personasOrdenadas(){ return PERSONAS.slice().sort(function(a,b){ return norm(a.nombre).localeCompare(norm(b.nombre)); }); }
@@ -958,7 +1190,7 @@ const ACCIONES=[
   {id:"nueva",nom:"Nueva tarea",ic:"circle-plus"},
   {id:"personas",nom:"Personas",ic:"users"},
   {id:"enfoque",nom:"Enfoque",ic:"clock-play"},
-  {id:"biblioteca",nom:"Biblioteca",ic:"book-2"},
+  {id:"biblioteca",nom:"Bienvenida",ic:"book-2"},
   {id:"social",nom:"Social",ic:"world"}
 ];
 const F_TAREAS=[
@@ -1027,7 +1259,7 @@ function mostrarGiro(){
   window._gt=setTimeout(function(){ g.classList.remove("show"); },1200);
 }
 async function irADimension(id){
-  DIM=id; cerrarMenu(); beep(1); mostrarGiro();
+  DIM=id; ORDENAR_DIMS=false; cerrarMenu(); beep(1); mostrarGiro();
   volver();
   DASH=(await api("dashboard",{dimension:DIM})).data||DASH;
   construir();
@@ -1052,14 +1284,46 @@ function contarGrupo(g){
   if(g.tipo==="listas")return LISTAS.filter(function(x){ return x.tipo==="lista"&&enDim(x); }).length;
   return g.items.length;
 }
+/* Estado plegado de cada zona (se recuerda entre sesiones). */
+function zonaPlegada(id){ return gget("s7_zona_"+id,"0")==="1"; }
+function alternarZona(id){
+  const z=document.getElementById(id); if(!z)return;
+  const pleg=!z.classList.contains("plegada");
+  z.classList.toggle("plegada",pleg);
+  gset("s7_zona_"+id, pleg?"1":"0");
+}
+/* Modo de reordenar dimensiones en el menu lateral. */
+let ORDENAR_DIMS=false;
+function alternarOrdenDims(){ ORDENAR_DIMS=!ORDENAR_DIMS; construir(); }
+
 function construir(){
+  const editable=DIMENSIONES.slice(1);   /* todo menos General */
   let nav="";
-  DIMENSIONES.forEach(function(d){
-    nav+='<button class="dw-item'+(igual(d.id,DIM)?" on":"")+'" onclick="irADimension(\''+d.id+'\')">'+
-      '<span class="ic">'+ico(d.ic)+'</span><span>'+d.id+'</span>'+
-      '<span class="ct">'+cuentaDim(d.id)+'</span></button>';
-  });
+  const pintaItem=function(d,i){
+    let mv="";
+    if(ORDENAR_DIMS){
+      mv='<span class="mv" onclick="event.stopPropagation()">'+
+         '<button onclick="moverDim('+i+',-1)"'+(i===0?" disabled":"")+' aria-label="Subir">'+ico("chevron-up")+'</button>'+
+         '<button onclick="moverDim('+i+',1)"'+(i===editable.length-1?" disabled":"")+' aria-label="Bajar">'+ico("chevron-down")+'</button></span>';
+    }
+    return '<button class="dw-item'+(igual(d.id,DIM)?" on":"")+'" onclick="irADimension(\''+esc(d.id).replace(/'/g,"\\'")+'\')">'+
+      '<span class="ic">'+ico(d.ic)+'</span><span>'+esc(d.id)+'</span>'+
+      '<span class="ct">'+cuentaDim(d.id)+'</span>'+mv+'</button>';
+  };
+  nav+='<button class="dw-item'+(igual("General",DIM)?" on":"")+'" onclick="irADimension(\'General\')">'+
+       '<span class="ic">'+ico(DIM_BASE[0].ic)+'</span><span>General</span>'+
+       '<span class="ct">'+cuentaDim("General")+'</span></button>';
+  editable.forEach(function(d,i){ nav+=pintaItem(d,i); });
+  nav+='<div class="dw-sep">Proyectos</div>';
+  nav+='<button class="dw-item" onclick="nuevoProyecto()"><span class="ic">'+ico("plus")+'</span>'+
+       '<span>Crear proyecto</span><span class="ct">'+PROYECTOS.length+' de '+MAX_PROYECTOS+'</span></button>';
+  if(PROYECTOS.length&&ORDENAR_DIMS){
+    nav+='<button class="dw-item" onclick="borrarProyectoUI()"><span class="ic">'+ico("trash")+'</span><span>Eliminar un proyecto</span></button>';
+  }
   document.getElementById("dw-nav").innerHTML=nav;
+  const acc=document.getElementById("dw-acc");
+  if(acc)acc.innerHTML='<button onclick="alternarOrdenDims()" aria-label="Ordenar" title="Mover de orden">'+ico(ORDENAR_DIMS?"check":"arrows-sort")+'</button>'+
+                       '<button onclick="ordenAlfabetico()" aria-label="Alfabetico" title="Volver al orden alfabetico">'+ico("sort-a-z")+'</button>';
 
   const di=dimInfo(DIM);
   document.getElementById("hdr-dim").textContent=DIM;
@@ -1070,7 +1334,12 @@ function construir(){
 
   let h="";
   GRUPOS.forEach(function(g){
-    h+='<div class="zona" id="'+g.id+'"><div class="zona-tit"><span class="ic">'+ico(g.ic)+'</span><h3>'+g.nom+'</h3></div>';
+    const pleg=zonaPlegada(g.id);
+    h+='<div class="zona'+(pleg?" plegada":"")+'" id="'+g.id+'">'+
+       '<div class="zona-tit" onclick="alternarZona(\''+g.id+'\')">'+
+       '<span class="ic">'+ico(g.ic)+'</span><h3>'+g.nom+'</h3>'+
+       '<span class="ct-z">'+contarGrupo(g)+'</span>'+
+       '<span class="chv">'+ico("chevron-down")+'</span></div><div class="zona-cpo">';
     if(g.tipo==="acciones"){
       h+='<div class="acc-grid">';
       g.items.forEach(function(s){ h+='<div class="acc" onclick="abrir(\''+s.id+'\')"><div class="dot">'+ico(s.ic)+'</div><div class="nm">'+s.nom+'</div></div>'; });
@@ -1092,15 +1361,74 @@ function construir(){
       h+='<div class="fila" onclick="abrir(\'notas\')"><div class="ic">'+ico("notes")+'</div>'+
          '<div class="inf"><div class="nm">Mis notas</div><div class="ct">'+ns+' nota'+(ns===1?"":"s")+'</div></div><div class="ch">'+ico("chevron-right")+'</div></div>';
     }
-    h+='</div>';
+    h+='</div></div>';
   });
   document.getElementById("zonas").innerHTML=h;
   marcarTab("tb-inicio");
 }
 
+/* ---------- proyectos y orden de dimensiones ---------- */
+async function guardarDims(){
+  await api("guardarPref",{clave:"dims:extra",valor:JSON.stringify(PROYECTOS)});
+  const orden=DIMENSIONES.slice(1).map(function(d){ return d.id; });
+  await api("guardarPref",{clave:"dims:orden",valor:JSON.stringify(orden)});
+  PREFS["dims:extra"]=JSON.stringify(PROYECTOS);
+  PREFS["dims:orden"]=JSON.stringify(orden);
+}
+/* Mueve una dimension un lugar arriba o abajo en el menu. */
+async function moverDim(i,paso){
+  const lista=DIMENSIONES.slice(1);
+  const j=i+paso;
+  if(j<0||j>=lista.length)return;
+  const tmp=lista[i]; lista[i]=lista[j]; lista[j]=tmp;
+  DIMENSIONES=[DIM_BASE[0]].concat(lista);
+  construir();
+  await guardarDims();
+}
+async function ordenAlfabetico(){
+  const lista=DIMENSIONES.slice(1).sort(function(a,b){ return norm(a.id).localeCompare(norm(b.id)); });
+  DIMENSIONES=[DIM_BASE[0]].concat(lista);
+  construir();
+  await api("guardarPref",{clave:"dims:orden",valor:"[]"});
+  PREFS["dims:orden"]="[]";
+  recalcDims(); construir();
+}
+async function nuevoProyecto(){
+  if(PROYECTOS.length>=MAX_PROYECTOS){
+    await confirmar({titulo:"Limite alcanzado",texto:"Puedes tener hasta "+MAX_PROYECTOS+" proyectos ademas de las siete dimensiones. Elimina uno para crear otro.",ok:"Entendido",cancelar:"Cerrar",ic:"folder"});
+    return;
+  }
+  const n=await pedirTexto({titulo:"Nuevo proyecto",texto:"Un espacio propio para agrupar tareas, listas y notas.",placeholder:"Por ejemplo: Medio maraton",ok:"Crear",ic:"folder-plus"});
+  if(!n)return;
+  if(DIMENSIONES.some(function(d){ return igual(d.id,n); })){
+    await confirmar({titulo:"Ese nombre ya existe",texto:"Elige otro nombre para tu proyecto.",ok:"Entendido",cancelar:"Cerrar"});
+    return;
+  }
+  PROYECTOS.push({id:n, ic:ICONOS_PROY[PROYECTOS.length%ICONOS_PROY.length], desc:"Proyecto creado por ti."});
+  DIMENSIONES=DIMENSIONES.concat([PROYECTOS[PROYECTOS.length-1]]);
+  await guardarDims();
+  recalcDims(); construir();
+  await irADimension(n);
+}
+async function borrarProyectoUI(){
+  if(!PROYECTOS.length)return;
+  const n=await pedirTexto({titulo:"Eliminar proyecto",texto:"Escribe el nombre exacto del proyecto que quieres quitar. Sus tareas no se borran: pasan a General.",placeholder:PROYECTOS[0].id,ok:"Eliminar",ic:"trash"});
+  if(!n)return;
+  const p=PROYECTOS.find(function(x){ return igual(x.id,n); });
+  if(!p){ await confirmar({titulo:"No encontrado",texto:"No hay un proyecto con ese nombre.",ok:"Entendido",cancelar:"Cerrar"}); return; }
+  const si=await confirmar({titulo:"Eliminar \u201c"+p.id+"\u201d?",texto:"El proyecto desaparece del menu. Las tareas que tenia quedan visibles en General.",ok:"Eliminar",peligro:true});
+  if(!si)return;
+  PROYECTOS=PROYECTOS.filter(function(x){ return !igual(x.id,p.id); });
+  DIMENSIONES=DIMENSIONES.filter(function(x){ return !igual(x.id,p.id); });
+  if(igual(DIM,p.id))DIM="General";
+  await guardarDims();
+  recalcDims(); construir();
+}
+
 /* ---------- navegacion de pantalla ---------- */
-function abrir(id){
-  beep(1); SECCION_ACTUAL=id;
+function abrir(id,sinBeep){
+  if(!sinBeep)beep(1);
+  SECCION_ACTUAL=id;
   const s=TODAS.find(function(x){ return x.id===id; });
   let titulo = s ? s.nom : ({notas:"Notas",listas:"Mis listas",perfil:"Perfil",detalle:"Detalle de la tarea"}[id]||id);
   document.getElementById("pt-titulo").textContent=titulo;
@@ -1127,11 +1455,13 @@ function abrir(id){
   else if(id==="perfil")marcarTab("tb-perfil");
   else if(id==="dashboard")marcarTab("tb-resumen");
   else marcarTab("");
+  guardarUbicacion();
 }
 function volver(){
   document.getElementById("pantalla").classList.remove("activa");
   SECCION_ACTUAL=null; LISTA_ACTUAL=null; TAREA_ACTUAL=null;
   marcarTab("tb-inicio");
+  guardarUbicacion();
 }
 
 /* ---------- pintar tareas ---------- */
@@ -1146,7 +1476,17 @@ function pillsDe(t){
   if(esGeneral()&&t.dimension)p+='<span class="pill p-dim">'+esc(t.dimension)+'</span>';
   return p;
 }
-function tareaHTML(t,conAsa){
+/* Botones para mover una tarea de lugar sin arrastrar. */
+function controlesMover(i,total){
+  const arriba=i===0, abajo=i===total-1;
+  return '<div class="mover" onclick="event.stopPropagation()">'+
+    '<button class="mv-btn" onclick="moverTarea('+i+',\'tope\')"'+(arriba?" disabled":"")+' title="Hasta arriba" aria-label="Hasta arriba">'+ico("chevrons-up")+'</button>'+
+    '<button class="mv-btn" onclick="moverTarea('+i+',\'sube\')"'+(arriba?" disabled":"")+' title="Un lugar arriba" aria-label="Un lugar arriba">'+ico("chevron-up")+'</button>'+
+    '<button class="mv-btn" onclick="moverTarea('+i+',\'baja\')"'+(abajo?" disabled":"")+' title="Un lugar abajo" aria-label="Un lugar abajo">'+ico("chevron-down")+'</button>'+
+    '<button class="mv-btn" onclick="moverTarea('+i+',\'fondo\')"'+(abajo?" disabled":"")+' title="Hasta abajo" aria-label="Hasta abajo">'+ico("chevrons-down")+'</button>'+
+    '</div>';
+}
+function tareaHTML(t,conAsa,idx,total){
   const per=String(t.persona||"").trim();
   let meta=pillsDe(t);
   if(per&&per!=="-")meta+='<span>'+ico("user")+esc(per)+'</span>';
@@ -1160,6 +1500,7 @@ function tareaHTML(t,conAsa){
 
   return '<div class="tarea'+(activa(t)?"":" hecha")+'" data-fila="'+t.fila+'">'+
     (conAsa?'<div class="asa" data-asa="1">'+ico("grip-vertical")+'</div>':"")+
+    (conAsa&&total>1?controlesMover(idx,total):"")+
     '<div class="cuerpo" onclick="abrirDetalle('+t.fila+')">'+
       '<div class="desc">'+esc(t.descripcion)+'</div>'+
       (t.detalle?'<div class="det">'+esc(t.detalle)+'</div>':"")+
@@ -1174,11 +1515,11 @@ function pintarFiltro(cont,sec){
 
   if(esSeisSec){
     const u=seisActivas().length;
-    h+='<div class="ayuda">Estas son las seis cosas que de verdad importan. El limite es de '+LIMITE_SEIS+' en todo el sistema, sin importar la dimension. Vas '+u+' de '+LIMITE_SEIS+'. Arrastra para cambiar el orden.</div>';
+    h+='<div class="ayuda">Estas son las seis cosas que de verdad importan. El limite es de '+LIMITE_SEIS+' en todo el sistema, sin importar la dimension. Vas '+u+' de '+LIMITE_SEIS+'. Usa las flechas para cambiar el orden, o arrastra desde el asa.</div>';
   } else {
     h+='<div class="barra-orden">'+
        '<span class="tag-orden">'+(modoOrden()==="manual"?"Orden manual":"Orden por vencimiento")+'</span>'+
-       (modoOrden()==="manual"?'<button class="link-orden" onclick="volverAuto()">Volver al automatico</button>':'<span class="tag-orden" style="background:transparent;color:#9AB0C6">Arrastra para ordenar a mano</span>')+
+       (modoOrden()==="manual"?'<button class="link-orden" onclick="volverAuto()">Volver al automatico</button>':'<span class="tag-orden" style="background:transparent;color:#9AB0C6">Usa las flechas para ordenar a mano</span>')+
        '</div>';
   }
 
@@ -1188,10 +1529,31 @@ function pintarFiltro(cont,sec){
 
   h+='<div id="cont-tareas">';
   if(!lista.length)h+='<div class="vacio">No hay tareas aqui por ahora</div>';
-  else lista.forEach(function(t){ h+=tareaHTML(t,true); });
+  else lista.forEach(function(t,i){ h+=tareaHTML(t,true,i,lista.length); });
   h+='</div>';
   cont.innerHTML=h;
+  VISTA_ORDEN={modo:esSeisSec?"seis":"manual", filas:lista.map(function(t){ return Number(t.fila); })};
   activarArrastre(esSeisSec?"seis":"manual");
+}
+
+/* Mueve una tarea dentro de la lista que estas viendo. */
+let VISTA_ORDEN={modo:"manual",filas:[]};
+async function moverTarea(i,accion){
+  const f=VISTA_ORDEN.filas.slice();
+  if(i<0||i>=f.length)return;
+  const fila=f.splice(i,1)[0];
+  let destino=i;
+  if(accion==="tope")destino=0;
+  else if(accion==="fondo")destino=f.length;
+  else if(accion==="sube")destino=Math.max(0,i-1);
+  else if(accion==="baja")destino=Math.min(f.length,i+1);
+  f.splice(destino,0,fila);
+
+  if(VISTA_ORDEN.modo==="seis"){ await api("guardarOrdenSeis",{orden:f}); }
+  else{ await api("guardarOrdenManual",{orden:f,dimension:DIM}); PREFS["orden:"+DIM]="manual"; }
+  beep(1);
+  await cargarTodo();
+  if(SECCION_ACTUAL)abrir(SECCION_ACTUAL,true);
 }
 
 function pintarPorPersona(cont,sec){
@@ -1267,7 +1629,8 @@ async function completar(fila){
   else alert((r&&r.error)||"No se pudo completar");
 }
 async function borrarTarea(fila){
-  if(!confirm("Eliminar esta tarea?"))return;
+  const si=await confirmar({titulo:"Eliminar esta tarea?",texto:"Se quita de la hoja y no se puede recuperar.",ok:"Eliminar",peligro:true,ic:"trash"});
+  if(!si)return;
   await api("eliminarTarea",{fila:fila});
   await cargarTodo(); construir(); if(SECCION_ACTUAL)abrir(SECCION_ACTUAL);
 }
@@ -1275,10 +1638,11 @@ async function borrarCompletadas(){
   const n=tareasDim().filter(function(t){ return !activa(t); }).length;
   if(!n)return;
   const donde=esGeneral()?"de todas las dimensiones":"de "+DIM;
-  if(!confirm("Se eliminaran "+n+" tarea"+(n===1?"":"s")+" completada"+(n===1?"":"s")+" "+donde+". Esta accion no se puede deshacer. Continuar?"))return;
+  const si=await confirmar({titulo:"Eliminar completadas?",texto:"Se eliminaran "+n+" tarea"+(n===1?"":"s")+" completada"+(n===1?"":"s")+" "+donde+". Esta accion no se puede deshacer.",ok:"Eliminar "+n,peligro:true,ic:"trash"});
+  if(!si)return;
   const r=await api("eliminarCompletadas",{dimension:DIM});
   await cargarTodo(); construir(); if(SECCION_ACTUAL)abrir(SECCION_ACTUAL);
-  if(r&&r.ok)alert("Se eliminaron "+r.borradas+" tareas completadas.");
+  if(r&&r.ok)avisar("guardada");
 }
 async function cambiarEstadoTarea(fila,estado){
   const r=await api("cambiarEstado",{fila:fila,estado:estado});
@@ -1393,7 +1757,9 @@ async function guardarNueva(){
   });
   if(!r||!r.ok){ alert((r&&r.error)||"No se pudo guardar"); return; }
   if(igual(enf,ENF_SEIS)&&pos)await api("guardarOrdenSeis",{orden:reordenarConPosicion(r.fila,Number(pos))});
-  await cargarTodo(); construir(); volver(); beep(1);
+  const est=document.getElementById("f-est").value;
+  await cargarTodo(); construir(); volver();
+  avisar(igual(est,"En Progreso")?"pendiente":"guardada");
 }
 function reordenarConPosicion(fila,pos){
   const lista=ordenarSeis(seisActivas().filter(function(t){ return Number(t.fila)!==Number(fila); }));
@@ -1442,6 +1808,8 @@ function abrirDetalle(fila){
 async function guardarDetalle(fila){
   const enf=document.getElementById("f-enfoque").value;
   const pos=document.getElementById("f-pos")?document.getElementById("f-pos").value:"";
+  const antes=TAREAS.find(function(x){ return Number(x.fila)===Number(fila); });
+  const estAntes=antes?String(antes.estado||""):"";
   const r=await api("editarTarea",{
     fila:fila,
     descripcion:document.getElementById("f-desc").value.trim(),
@@ -1456,7 +1824,11 @@ async function guardarDetalle(fila){
   });
   if(!r||!r.ok){ alert((r&&r.error)||"No se pudo guardar"); return; }
   if(igual(enf,ENF_SEIS)&&pos)await api("guardarOrdenSeis",{orden:reordenarConPosicion(fila,Number(pos))});
-  await cargarTodo(); construir(); volver(); beep(1);
+  const est=document.getElementById("f-est").value;
+  await cargarTodo(); construir(); volver();
+  if(igual(est,"Completada")&&!igual(estAntes,"Completada"))celebrar();
+  else if(igual(est,"En Progreso")||igual(est,"En Pausa"))avisar("pendiente");
+  else avisar("guardada");
 }
 
 /* ---------- dashboard ---------- */
@@ -1609,7 +1981,8 @@ async function guardarPersona(){
   await cargarTodo(); abrir("personas");
 }
 async function borrarPersona(n){
-  if(!confirm("Eliminar a "+n+" del directorio?"))return;
+  const si=await confirmar({titulo:"Eliminar del directorio?",texto:"Se quita a "+n+" de tus personas. Las tareas donde aparece no se borran.",ok:"Eliminar",peligro:true,ic:"user-minus"});
+  if(!si)return;
   await api("eliminarPersona",{nombre:n});
   PERSONA_EDIT=null;
   await cargarTodo(); abrir("personas");
@@ -1640,7 +2013,8 @@ async function guardarNota(){
   await cargarTodo(); construir(); abrir("notas");
 }
 async function borrarNota(id){
-  if(!confirm("Eliminar esta nota?"))return;
+  const si=await confirmar({titulo:"Eliminar esta nota?",texto:"El texto se pierde y no se puede recuperar.",ok:"Eliminar",peligro:true,ic:"trash"});
+  if(!si)return;
   await api("eliminarNota",{id:id});
   await cargarTodo(); construir(); abrir("notas");
 }
@@ -1685,7 +2059,11 @@ function abrirLista(nombre){
        '<div class="tx">'+esc(i.texto)+'</div>'+
        '<button class="icon-btn ib-del" onclick="borrarItem(\''+esc(i.id)+'\')">'+ico("trash")+'</button></div>';
   });
-  h+='<button class="btn btn-borde" style="width:100%;margin-top:14px" onclick="borrarLista()">'+ico("trash")+' Eliminar la lista completa</button>';
+  const hechos=items.filter(function(x){ return x.completado; }).length;
+  h+='<div style="margin-top:18px;display:flex;flex-direction:column;gap:9px">';
+  if(hechos)h+='<button class="btn btn-suave" onclick="vaciarLista(true)">'+ico("circle-check")+' Quitar los '+hechos+' elementos marcados</button>';
+  if(items.length)h+='<button class="btn btn-borde" onclick="vaciarLista(false)">'+ico("eraser")+' Vaciar la lista (conservarla)</button>';
+  h+='<button class="btn btn-borde" onclick="borrarLista()">'+ico("trash")+' Eliminar la lista completa</button></div>';
   b.innerHTML=h;
   document.getElementById("pantalla").classList.add("activa");
   marcarTab("");
@@ -1698,8 +2076,31 @@ async function agregarItem(){
 }
 async function toggleItem(id){ await api("toggleItemLista",{id:id}); await cargarTodo(); abrirLista(LISTA_ACTUAL); }
 async function borrarItem(id){ await api("eliminarItemLista",{id:id}); await cargarTodo(); abrirLista(LISTA_ACTUAL); }
+/* Borra los elementos de la lista pero conserva la lista. */
+async function vaciarLista(soloMarcados){
+  const items=LISTAS.filter(function(x){
+    return x.tipo==="item"&&x.lista===LISTA_ACTUAL&&(!soloMarcados||x.completado);
+  });
+  if(!items.length)return;
+  const si=await confirmar({
+    titulo: soloMarcados?"Quitar los marcados?":"Vaciar la lista?",
+    texto: soloMarcados
+      ? "Se eliminan "+items.length+" elemento"+(items.length===1?"":"s")+" ya completado"+(items.length===1?"":"s")+". Lo demas se queda igual."
+      : "Se eliminan los "+items.length+" elementos de \u201c"+LISTA_ACTUAL+"\u201d. La lista sigue existiendo, lista para llenarse de nuevo.",
+    ok: soloMarcados?"Quitar "+items.length:"Vaciar", peligro:true, ic:"eraser"
+  });
+  if(!si)return;
+  const r=await api("vaciarLista",{lista:LISTA_ACTUAL, soloCompletados:soloMarcados?"1":""});
+  if(r&&r.ok===false&&/no reconocida/i.test(String(r.error||""))){
+    /* respaldo si el Apps Script aun no tiene la accion nueva */
+    for(let i=0;i<items.length;i++)await api("eliminarItemLista",{id:items[i].id});
+  }
+  await cargarTodo(); construir(); abrirLista(LISTA_ACTUAL);
+  avisar("guardada");
+}
 async function borrarLista(){
-  if(!confirm("Eliminar la lista \""+LISTA_ACTUAL+"\" y todo su contenido?"))return;
+  const si=await confirmar({titulo:"Eliminar la lista completa?",texto:"Se elimina \u201c"+LISTA_ACTUAL+"\u201d con todos sus elementos. Si solo quieres dejarla vacia, usa Vaciar la lista.",ok:"Eliminar la lista",peligro:true,ic:"trash"});
+  if(!si)return;
   await api("eliminarLista",{lista:LISTA_ACTUAL});
   await cargarTodo(); construir(); abrir("listas");
 }
@@ -1724,26 +2125,44 @@ function pintarPerfil(cont){
     '<div class="perfil-sub">Your Life in Balance</div></div>';
 
   h+='<div class="kpis">'+
-    '<div class="kpi"><div class="n" style="color:var(--azul)">'+activas+'</div><div class="l">Activas</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--ok)">'+hechas+'</div><div class="l">Completadas</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--sol-os)">'+pomos+'</div><div class="l">Sesiones</div></div>'+
+    '<div class="kpi" style="cursor:pointer" onclick="verFiltroGeneral(\'f-total\')"><div class="n" style="color:var(--azul)">'+activas+'</div><div class="l">Activas</div></div>'+
+    '<div class="kpi" style="cursor:pointer" onclick="verFiltroGeneral(\'f-comp\')"><div class="n" style="color:var(--ok)">'+hechas+'</div><div class="l">Completadas</div></div>'+
+    '<div class="kpi" style="cursor:pointer" onclick="verResumenDe(\'General\')"><div class="n" style="color:var(--sol-os)">'+pomos+'</div><div class="l">Sesiones</div></div>'+
     '</div>';
 
   h+='<div class="card"><h3>'+ico("user")+'Tu nombre</h3>'+
      '<input type="text" id="pf-nom" value="'+esc(PREFS["perfil:nombre"]||"")+'" placeholder="Como quieres que te llame">'+
      '<button class="btn btn-primario" style="width:100%;margin-top:12px" onclick="guardarNombrePerfil()">Guardar</button></div>';
 
-  h+='<div class="card"><h3>'+ico("layout-grid")+'Tus dimensiones</h3>';
+  h+='<div class="card"><h3>'+ico("layout-grid")+'Tus dimensiones</h3>'+
+     '<div style="font-size:12.5px;color:var(--gris);margin:-4px 0 10px">Toca cualquiera para ver su resumen completo.</div>';
   DIMENSIONES.forEach(function(d){
     const prev=DIM; DIM=d.id;
     const n=TAREAS.filter(function(t){ return enDim(t)&&activa(t); }).length;
     DIM=prev;
-    h+='<div class="p-row"><div class="pn">'+ico(d.ic)+' '+d.id+'</div><span class="p-tipo">'+n+' activas</span></div>';
+    h+='<div class="p-row p-link" onclick="verResumenDe(\''+esc(d.id).replace(/'/g,"\\'")+'\')">'+
+       '<div class="pn">'+ico(d.ic)+' '+esc(d.id)+'</div>'+
+       '<span class="p-tipo">'+n+' activas</span>'+
+       '<span class="p-chv">'+ico("chevron-right")+'</span></div>';
   });
   h+='</div>';
 
   if(u)h+='<button class="btn btn-borde" style="width:100%" onclick="quitarFoto()">'+ico("trash")+' Quitar la foto</button>';
   cont.innerHTML=h;
+}
+/* Desde el perfil, saltar al resumen de una dimension. */
+async function verResumenDe(id){
+  DIM=id;
+  document.getElementById("hdr-dim").textContent=DIM;
+  DASH=(await api("dashboard",{dimension:DIM})).data||DASH;
+  construir();
+  abrir("dashboard");
+}
+async function verFiltroGeneral(idFiltro){
+  DIM="General";
+  document.getElementById("hdr-dim").textContent=DIM;
+  construir();
+  abrir(idFiltro);
 }
 async function guardarNombrePerfil(){
   const v=document.getElementById("pf-nom").value.trim();
@@ -1771,7 +2190,8 @@ function subirFoto(input){
   lector.readAsDataURL(f);
 }
 async function quitarFoto(){
-  if(!confirm("Quitar tu foto de perfil?"))return;
+  const si=await confirmar({titulo:"Quitar tu foto?",texto:"Vuelves al icono por defecto. Puedes subir otra cuando quieras.",ok:"Quitar",peligro:true,ic:"camera-off"});
+  if(!si)return;
   await api("eliminarFotoPerfil",{});
   PREFS["perfil:fotoUrl"]=""; PREFS["perfil:fotoId"]="";
   pintarFotoMini(); abrir("perfil");
@@ -1932,7 +2352,46 @@ function acronimoHTML(){
   h+='<div class="pie">Seven days a week &middot; Siete dias a la semana</div></div>';
   return h;
 }
-function pintarBiblioteca(cont){ cont.innerHTML='<div id="el-cont"></div>'; pintarLeccion(); }
+/* --- Biblioteca por secciones plegables --- */
+function acorAbierto(id,pordefecto){ return gget("s7_acor_"+id, pordefecto?"1":"0")==="1"; }
+function alternarAcor(id){
+  const e=document.getElementById("ac-"+id); if(!e)return;
+  const ab=!e.classList.contains("abierto");
+  e.classList.toggle("abierto",ab);
+  gset("s7_acor_"+id, ab?"1":"0");
+}
+function acorHTML(id,icono,titulo,subtitulo,cuerpo,pordefecto){
+  const ab=acorAbierto(id,pordefecto);
+  return '<div class="acor'+(ab?" abierto":"")+'" id="ac-'+id+'">'+
+    '<div class="acor-tit" onclick="alternarAcor(\''+id+'\')">'+
+      '<div class="ic">'+ico(icono)+'</div>'+
+      '<div class="nm">'+esc(titulo)+(subtitulo?'<div class="sb">'+esc(subtitulo)+'</div>':"")+'</div>'+
+      '<div class="chv">'+ico("chevron-right")+'</div></div>'+
+    '<div class="acor-cpo">'+cuerpo+'</div></div>';
+}
+function pintarBiblioteca(cont){
+  const bienvenida=
+    '<div class="entrada">Sotelo7 no es una lista de pendientes mas. Es un lugar para ver tu vida completa, repartida en las dimensiones que de verdad la sostienen, y decidir con calma que merece tu atencion hoy.</div>'+
+    acronimoHTML()+
+    '<div class="cierre">Empieza por lo simple: una tarea, una dimension, un dia. Lo demas se va acomodando.</div>';
+
+  const comoUsar=
+    '<div class="entrada">Tres ideas para sacarle provecho desde el primer dia.</div>'+
+    listaHTML([
+      {n:"1",tt:"Elige la dimension antes que la tarea",dd:"Cuando algo llega, pregunta a que parte de tu vida pertenece. Eso solo ya ordena la mitad del desorden."},
+      {n:"2",tt:"Respeta el limite de las seis",dd:"Seis tareas al dia, en todo el sistema. No es una restriccion tecnica, es la unica forma de que la lista signifique algo."},
+      {n:"3",tt:"Cierra el dia mirando el resumen",dd:"Dos minutos en Resumen te dicen mas de tu semana que cualquier lista larga."}
+    ]);
+
+  cont.innerHTML=
+    acorHTML("bienvenida","hand-love-you","Bienvenida","Que es Sotelo7 y para que sirve",bienvenida,true)+
+    acorHTML("comousar","compass","Introduccion","Como empezar a usarla",comoUsar,false)+
+    acorHTML("curso","school","Curso de productividad",LECCIONES.length+" lecciones cortas",'<div id="el-cont"></div>',false)+
+    acorHTML("proximo","packages","Proximamente","Lecturas, juegos y mas contenido",
+      '<div class="entrada">Aqui van a vivir la biblioteca de libros clasicos, los juegos ligeros para practicar habilidades blandas y las lecturas que vayamos sumando.</div>'+
+      '<div class="cierre">En construccion. Vuelve pronto.</div>',false);
+  pintarLeccion();
+}
 function listaHTML(items){
   if(!items||!items.length)return "";
   let h='<div class="lec-lista">';
@@ -2211,8 +2670,9 @@ function aplicarSlot(i){
   if(TOKEN){ api("guardarPref",{clave:"tema",valor:"custom:"+i}); PREFS["tema"]="custom:"+i; }
   aplicarTema(); construir(); abrirPanel();
 }
-function eliminarTema(i){
-  if(!confirm("Eliminar este tema guardado?"))return;
+async function eliminarTema(i){
+  const si=await confirmar({titulo:"Eliminar este tema?",texto:"El tema guardado desaparece de tu galeria.",ok:"Eliminar",peligro:true,ic:"palette"});
+  if(!si)return;
   const cs=leerCustoms(); cs.splice(i,1); guardarCustoms(cs);
   const actual=gget("s7_tema","essential");
   if(actual==="custom:"+i)gset("s7_tema","essential");
@@ -2248,6 +2708,15 @@ window.addEventListener("load",function(){
   document.addEventListener("touchstart",initAudio,{once:true});
   document.addEventListener("click",initAudio,{once:true});
   document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ cerrarMenu(); cerrarPanel(); } });
+  /* Recuerda donde te quedaste: al hacer scroll, al cerrar y al minimizar. */
+  let _st=null;
+  window.addEventListener("scroll",function(){
+    clearTimeout(_st);
+    _st=setTimeout(guardarUbicacion,400);
+  },{passive:true});
+  window.addEventListener("beforeunload",guardarUbicacion);
+  document.addEventListener("visibilitychange",function(){ if(document.hidden)guardarUbicacion(); });
+
   const s=leerSesion();
   if(s){ TOKEN=s.token; entrar(true); }
   else marcarPantallaLogin(true);
