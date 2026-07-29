@@ -250,6 +250,9 @@ label{display:block;font-size:12px;font-weight:600;color:var(--azul-os);margin-b
 .pomo{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:22px;text-align:center;}
 .pomo-time{font-size:56px;font-weight:800;color:var(--azul);letter-spacing:-2px;margin:18px 0;font-variant-numeric:tabular-nums;}
 .dur-row{display:flex;gap:8px;}
+.dur-manual{display:flex;gap:8px;margin-top:9px;}
+.dur-manual input{flex:1;min-width:0;}
+.dur-manual .btn{flex-shrink:0;padding-left:18px;padding-right:18px;}
 .est-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
 .est-btn{border:none;cursor:pointer;font-size:13px;font-weight:600;padding:11px;border-radius:11px;color:var(--sobre-acento);}
 
@@ -488,13 +491,39 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 .tarea .cuerpo{min-width:0;}
 
 /* --- Drawer: proyectos y orden --- */
-.dw-rot{position:relative;}
-.dw-rot .dw-acc{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:5px;}
-.dw-rot .dw-acc button{border:none;background:var(--linea-sf);color:var(--azul);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;}
-.dw-item .mv{display:flex;flex-direction:column;gap:2px;margin-left:6px;}
-.dw-item .mv button{border:none;background:transparent;color:var(--gris);width:20px;height:15px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border-radius:5px;}
-.dw-item .mv button:hover{background:var(--linea);}
-.dw-item .mv button:disabled{opacity:.22;}
+/* --- Reordenar (dimensiones / proyectos): pantalla ancha con botones grandes --- */
+#ordenar{position:fixed;inset:0;z-index:420;background:rgba(10,22,38,.5);display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px);}
+#ordenar .ord-sheet{background:var(--papel);width:100%;max-width:560px;max-height:85vh;border-radius:22px 22px 0 0;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgba(10,22,38,.28);animation:dlgSube .22s cubic-bezier(.22,1,.36,1);}
+@media(min-width:600px){#ordenar{align-items:center;}#ordenar .ord-sheet{border-radius:22px;max-height:80vh;animation:dlgPop .2s ease-out;}}
+#ordenar .ord-head{padding:20px 22px 12px;flex-shrink:0;}
+#ordenar .ord-head h4{font-size:19px;font-weight:var(--peso-tit);margin-bottom:4px;}
+#ordenar .ord-head p{font-size:13px;color:var(--gris);line-height:1.5;}
+#ordenar .ord-lista{overflow-y:auto;padding:4px 14px;flex:1;}
+#ordenar .ord-pie{padding:14px 22px calc(14px + env(safe-area-inset-bottom));flex-shrink:0;border-top:1px solid var(--linea-sf);}
+.ord-row{display:flex;align-items:center;gap:12px;padding:12px 8px;border-bottom:1px solid var(--linea-sf);}
+.ord-row:last-child{border-bottom:none;}
+.ord-row .ic{width:38px;height:38px;border-radius:11px;background:var(--linea-sf);color:var(--azul);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ord-row .nm{flex:1;font-size:15.5px;font-weight:600;min-width:0;}
+.ord-row .ct{font-size:12px;color:var(--gris);margin-top:1px;}
+.ord-btns2{display:flex;gap:8px;flex-shrink:0;}
+.ord-btn{width:46px;height:46px;border-radius:14px;border:1.5px solid var(--linea);background:var(--papel);color:var(--azul);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:background .12s,opacity .12s,transform .1s;padding:0;}
+.ord-btn:active:not(:disabled){transform:scale(.92);background:var(--linea-sf);}
+.ord-btn:disabled{opacity:.25;cursor:default;}
+.ord-del{width:40px;height:40px;border-radius:12px;border:none;background:transparent;color:var(--coral);display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;flex-shrink:0;}
+.ord-del:hover{background:rgba(255,90,74,.1);}
+
+/* --- Drawer: grupos plegables Dimensiones / Proyectos --- */
+.dw-grupo-tit{display:flex;align-items:center;gap:8px;padding:11px 14px 7px;cursor:pointer;user-select:none;}
+.dw-grupo-tit span.tt{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gris);flex:1;}
+.dw-grupo-tit .ct-g{font-size:11px;font-weight:700;color:var(--azul-os);background:var(--linea-sf);padding:2px 8px;border-radius:8px;}
+.dw-grupo-tit .rord{border:none;background:transparent;color:var(--gris);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0;}
+.dw-grupo-tit .rord:hover{background:var(--linea);}
+.dw-grupo-tit .chvg{color:var(--gris);font-size:16px;transition:transform .2s;display:flex;align-items:center;flex-shrink:0;}
+.dw-grupo.plegado .chvg{transform:rotate(-90deg);}
+.dw-grupo.plegado .dw-grupo-cpo{display:none;}
+.dw-item .del{border:none;background:transparent;color:var(--coral);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;margin-left:4px;flex-shrink:0;}
+.dw-item .del:hover{background:rgba(255,90,74,.12);}
+.dw-item{position:relative;}
 .dw-sep{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gris);padding:14px 16px 6px;}
 
 /* --- Acordeon de contenido (biblioteca / bienvenida) --- */
@@ -512,6 +541,11 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 .p-row.p-link{cursor:pointer;border-radius:11px;padding:11px 9px;margin:0 -9px;transition:background .13s;}
 .p-row.p-link:hover{background:var(--linea-sf);}
 .p-row .p-chv{color:var(--gris);font-size:17px;display:flex;align-items:center;}
+.kpi-link{cursor:pointer;transition:transform .12s,background .12s;}
+.kpi-link:hover{background:var(--linea-sf);}
+.kpi-link:active{transform:scale(.96);}
+.bloque-tit{transition:background .3s,border-radius .3s;}
+.bloque-tit.destello{background:var(--linea-sf);border-radius:10px;padding-left:8px;}
 </style>
 </head>
 <body>
@@ -546,9 +580,8 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
     <div class="dw-top">
       <div class="m" id="dw-mark"></div>
       <h2>Sotelo7</h2>
-      <p>Your Life in Balance &middot; v10</p>
+      <p>Your Life in Balance &middot; v11</p>
     </div>
-    <div class="dw-rot">Dimensiones<span class="dw-acc" id="dw-acc"></span></div>
     <div class="dw-nav" id="dw-nav"></div>
     <div class="dw-pie">Simplify &middot; Organize &middot; Thrive &middot; Energize &middot; Live &middot; Optimize<br>Seven days a week</div>
   </nav>
@@ -576,6 +609,7 @@ body.tema-academia .elearn h3,body.tema-academia .card h3{letter-spacing:0;}
 <div id="procesando" class="oculto"><div class="sp"></div></div>
 <div id="celebra" class="oculto"></div>
 <div id="dialogo" class="oculto"></div>
+<div id="ordenar" class="oculto"></div>
 
 <div id="panel" class="oculto" onclick="if(event.target===this)cerrarPanel()">
   <div class="sheet">
@@ -639,7 +673,10 @@ const ICONOS_PROY=["folder","target-arrow","rocket","building-store","plane","he
 let PROYECTOS=[];              /* [{id,ic,desc}] creados por ti */
 let DIMENSIONES=DIM_BASE.slice();
 
-/* Lee proyectos y orden desde PREFS y arma el catalogo vigente. */
+/* Lee proyectos y orden desde PREFS y arma el catalogo vigente.
+   Las 7 dimensiones base y los proyectos se ordenan por separado:
+   la base usa "dims:orden" (o alfabetico si esta vacio), los
+   proyectos siempre respetan el orden guardado en su propio arreglo. */
 function recalcDims(){
   PROYECTOS=[];
   try{
@@ -647,24 +684,23 @@ function recalcDims(){
     if(Array.isArray(a))PROYECTOS=a.filter(function(p){ return p&&p.id; }).slice(0,MAX_PROYECTOS);
   }catch(e){}
 
-  const base=DIM_BASE.slice(1);                 /* sin General */
-  const todas=base.concat(PROYECTOS);
-
+  const base=DIM_BASE.slice(1);   /* 7 dimensiones fijas, sin General */
   let orden=[];
   try{ const o=JSON.parse(PREFS["dims:orden"]||"[]"); if(Array.isArray(o))orden=o; }catch(e){}
 
-  let lista;
+  let listaBase;
   if(orden.length){
-    lista=[];
+    listaBase=[];
     orden.forEach(function(id){
-      const d=todas.find(function(x){ return igual(x.id,id); });
-      if(d&&lista.indexOf(d)===-1)lista.push(d);
+      const d=base.find(function(x){ return igual(x.id,id); });
+      if(d&&listaBase.indexOf(d)===-1)listaBase.push(d);
     });
-    todas.forEach(function(d){ if(lista.indexOf(d)===-1)lista.push(d); });
+    base.forEach(function(d){ if(listaBase.indexOf(d)===-1)listaBase.push(d); });
   } else {
-    lista=todas.slice().sort(function(a,b){ return norm(a.id).localeCompare(norm(b.id)); });
+    listaBase=base.slice().sort(function(a,b){ return norm(a.id).localeCompare(norm(b.id)); });
   }
-  DIMENSIONES=[DIM_BASE[0]].concat(lista);
+
+  DIMENSIONES=[DIM_BASE[0]].concat(listaBase, PROYECTOS);
   if(!DIMENSIONES.some(function(d){ return igual(d.id,DIM); }))DIM="General";
 }
 function esProyecto(id){ return PROYECTOS.some(function(p){ return igual(p.id,id); }); }
@@ -1259,7 +1295,7 @@ function mostrarGiro(){
   window._gt=setTimeout(function(){ g.classList.remove("show"); },1200);
 }
 async function irADimension(id){
-  DIM=id; ORDENAR_DIMS=false; cerrarMenu(); beep(1); mostrarGiro();
+  DIM=id; cerrarMenu(); beep(1); mostrarGiro();
   volver();
   DASH=(await api("dashboard",{dimension:DIM})).data||DASH;
   construir();
@@ -1292,38 +1328,55 @@ function alternarZona(id){
   z.classList.toggle("plegada",pleg);
   gset("s7_zona_"+id, pleg?"1":"0");
 }
-/* Modo de reordenar dimensiones en el menu lateral. */
-let ORDENAR_DIMS=false;
-function alternarOrdenDims(){ ORDENAR_DIMS=!ORDENAR_DIMS; construir(); }
+/* Estado plegado de los grupos del drawer (Dimensiones / Proyectos). */
+function dwGrupoPlegado(id){ return gget("s7_dwg_"+id,"0")==="1"; }
+function alternarGrupoDrawer(id){
+  const g=document.getElementById("dwg-"+id); if(!g)return;
+  const pleg=!g.classList.contains("plegado");
+  g.classList.toggle("plegado",pleg);
+  gset("s7_dwg_"+id, pleg?"1":"0");
+}
 
 function construir(){
-  const editable=DIMENSIONES.slice(1);   /* todo menos General */
-  let nav="";
-  const pintaItem=function(d,i){
-    let mv="";
-    if(ORDENAR_DIMS){
-      mv='<span class="mv" onclick="event.stopPropagation()">'+
-         '<button onclick="moverDim('+i+',-1)"'+(i===0?" disabled":"")+' aria-label="Subir">'+ico("chevron-up")+'</button>'+
-         '<button onclick="moverDim('+i+',1)"'+(i===editable.length-1?" disabled":"")+' aria-label="Bajar">'+ico("chevron-down")+'</button></span>';
-    }
+  const baseN=DIM_BASE.length-1;
+  const dims=DIMENSIONES.slice(1,1+baseN);   /* 7 dimensiones fijas, sin General */
+
+  const filaDim=function(d){
     return '<button class="dw-item'+(igual(d.id,DIM)?" on":"")+'" onclick="irADimension(\''+esc(d.id).replace(/'/g,"\\'")+'\')">'+
       '<span class="ic">'+ico(d.ic)+'</span><span>'+esc(d.id)+'</span>'+
-      '<span class="ct">'+cuentaDim(d.id)+'</span>'+mv+'</button>';
+      '<span class="ct">'+cuentaDim(d.id)+'</span></button>';
   };
-  nav+='<button class="dw-item'+(igual("General",DIM)?" on":"")+'" onclick="irADimension(\'General\')">'+
+  const filaProy=function(p){
+    return '<div class="dw-item'+(igual(p.id,DIM)?" on":"")+'" role="button" tabindex="0" onclick="irADimension(\''+esc(p.id).replace(/'/g,"\\'")+'\')" onkeydown="if(event.key===\'Enter\')irADimension(\''+esc(p.id).replace(/'/g,"\\'")+'\')">'+
+      '<span class="ic">'+ico(p.ic)+'</span><span>'+esc(p.id)+'</span>'+
+      '<span class="ct">'+cuentaDim(p.id)+'</span>'+
+      '<button class="del" onclick="event.stopPropagation();borrarProyecto(\''+esc(p.id).replace(/'/g,"\\'")+'\')" aria-label="Eliminar proyecto" title="Eliminar proyecto">'+ico("trash")+'</button>'+
+      '</div>';
+  };
+
+  let nav='<button class="dw-item'+(igual("General",DIM)?" on":"")+'" onclick="irADimension(\'General\')">'+
        '<span class="ic">'+ico(DIM_BASE[0].ic)+'</span><span>General</span>'+
        '<span class="ct">'+cuentaDim("General")+'</span></button>';
-  editable.forEach(function(d,i){ nav+=pintaItem(d,i); });
-  nav+='<div class="dw-sep">Proyectos</div>';
-  nav+='<button class="dw-item" onclick="nuevoProyecto()"><span class="ic">'+ico("plus")+'</span>'+
-       '<span>Crear proyecto</span><span class="ct">'+PROYECTOS.length+' de '+MAX_PROYECTOS+'</span></button>';
-  if(PROYECTOS.length&&ORDENAR_DIMS){
-    nav+='<button class="dw-item" onclick="borrarProyectoUI()"><span class="ic">'+ico("trash")+'</span><span>Eliminar un proyecto</span></button>';
-  }
+
+  const plegDim=dwGrupoPlegado("dim");
+  nav+='<div class="dw-grupo'+(plegDim?" plegado":"")+'" id="dwg-dim">'+
+       '<div class="dw-grupo-tit" onclick="alternarGrupoDrawer(\'dim\')">'+
+         '<span class="tt">Dimensiones</span><span class="ct-g">'+dims.length+'</span>'+
+         '<button class="rord" onclick="event.stopPropagation();abrirOrdenar(\'dim\')" aria-label="Reordenar" title="Reordenar dimensiones">'+ico("arrows-sort")+'</button>'+
+         '<span class="chvg">'+ico("chevron-down")+'</span></div>'+
+       '<div class="dw-grupo-cpo">'+dims.map(filaDim).join("")+'</div></div>';
+
+  const plegProy=dwGrupoPlegado("proy");
+  nav+='<div class="dw-grupo'+(plegProy?" plegado":"")+'" id="dwg-proy">'+
+       '<div class="dw-grupo-tit" onclick="alternarGrupoDrawer(\'proy\')">'+
+         '<span class="tt">Proyectos</span><span class="ct-g">'+PROYECTOS.length+' de '+MAX_PROYECTOS+'</span>'+
+         (PROYECTOS.length>1?'<button class="rord" onclick="event.stopPropagation();abrirOrdenar(\'proy\')" aria-label="Reordenar" title="Reordenar proyectos">'+ico("arrows-sort")+'</button>':"")+
+         '<span class="chvg">'+ico("chevron-down")+'</span></div>'+
+       '<div class="dw-grupo-cpo">'+PROYECTOS.map(filaProy).join("")+
+         '<button class="dw-item" onclick="nuevoProyecto()"><span class="ic">'+ico("plus")+'</span><span>Crear proyecto</span></button>'+
+       '</div></div>';
+
   document.getElementById("dw-nav").innerHTML=nav;
-  const acc=document.getElementById("dw-acc");
-  if(acc)acc.innerHTML='<button onclick="alternarOrdenDims()" aria-label="Ordenar" title="Mover de orden">'+ico(ORDENAR_DIMS?"check":"arrows-sort")+'</button>'+
-                       '<button onclick="ordenAlfabetico()" aria-label="Alfabetico" title="Volver al orden alfabetico">'+ico("sort-a-z")+'</button>';
 
   const di=dimInfo(DIM);
   document.getElementById("hdr-dim").textContent=DIM;
@@ -1367,31 +1420,68 @@ function construir(){
   marcarTab("tb-inicio");
 }
 
+/* ---------- reordenar dimensiones / proyectos: pantalla grande ---------- */
+function abrirOrdenar(tipo){
+  cerrarMenu();
+  pintarOrdenar(tipo);
+}
+function cerrarOrdenar(){ document.getElementById("ordenar").classList.add("oculto"); }
+function pintarOrdenar(tipo){
+  const esDim = tipo==="dim";
+  const lista = esDim ? DIMENSIONES.slice(1,1+(DIM_BASE.length-1)) : PROYECTOS.slice();
+  const o=document.getElementById("ordenar");
+  let filas="";
+  if(!lista.length){
+    filas='<div class="vacio">No hay elementos para ordenar</div>';
+  } else {
+    lista.forEach(function(d,i){
+      filas+='<div class="ord-row">'+
+        '<div class="ic">'+ico(d.ic)+'</div>'+
+        '<div><div class="nm">'+esc(d.id)+'</div><div class="ct">'+cuentaDim(d.id)+' tarea'+(cuentaDim(d.id)===1?"":"s")+' activa'+(cuentaDim(d.id)===1?"":"s")+'</div></div>'+
+        '<div class="ord-btns2">'+
+          '<button class="ord-btn" onclick="moverEnOrdenar(\''+tipo+'\','+i+',-1)"'+(i===0?" disabled":"")+' aria-label="Subir">'+ico("chevron-up")+'</button>'+
+          '<button class="ord-btn" onclick="moverEnOrdenar(\''+tipo+'\','+i+',1)"'+(i===lista.length-1?" disabled":"")+' aria-label="Bajar">'+ico("chevron-down")+'</button>'+
+        '</div></div>';
+    });
+  }
+  o.innerHTML='<div class="ord-sheet">'+
+    '<div class="ord-head"><h4>'+(esDim?"Reordenar dimensiones":"Reordenar proyectos")+'</h4>'+
+    '<p>Usa las flechas para mover cada '+(esDim?"dimension":"proyecto")+' de lugar. El orden se guarda solo.</p></div>'+
+    '<div class="ord-lista">'+filas+'</div>'+
+    '<div class="ord-pie"><button class="btn btn-primario" style="width:100%" onclick="cerrarOrdenar()">Listo</button></div>'+
+    '</div>';
+  o.classList.remove("oculto");
+  o.onclick=function(e){ if(e.target===o)cerrarOrdenar(); };
+}
+async function moverEnOrdenar(tipo,i,paso){
+  const esDim = tipo==="dim";
+  if(esDim){
+    const baseN = DIM_BASE.length-1;              /* siempre 7 */
+    const lista=DIMENSIONES.slice(1,1+baseN);
+    const j=i+paso; if(j<0||j>=lista.length)return;
+    const tmp=lista[i]; lista[i]=lista[j]; lista[j]=tmp;
+    DIMENSIONES=[DIM_BASE[0]].concat(lista, PROYECTOS);
+    await guardarOrdenDims();
+  } else {
+    const j=i+paso; if(j<0||j>=PROYECTOS.length)return;
+    const tmp=PROYECTOS[i]; PROYECTOS[i]=PROYECTOS[j]; PROYECTOS[j]=tmp;
+    await guardarDims();
+  }
+  beep(1);
+  pintarOrdenar(tipo);
+  construir();
+}
+
 /* ---------- proyectos y orden de dimensiones ---------- */
 async function guardarDims(){
   await api("guardarPref",{clave:"dims:extra",valor:JSON.stringify(PROYECTOS)});
-  const orden=DIMENSIONES.slice(1).map(function(d){ return d.id; });
-  await api("guardarPref",{clave:"dims:orden",valor:JSON.stringify(orden)});
   PREFS["dims:extra"]=JSON.stringify(PROYECTOS);
+  await guardarOrdenDims();
+}
+async function guardarOrdenDims(){
+  const orden=DIMENSIONES.slice(1).filter(function(d){ return !esProyecto(d.id); }).map(function(d){ return d.id; });
+  await api("guardarPref",{clave:"dims:orden",valor:JSON.stringify(orden)});
   PREFS["dims:orden"]=JSON.stringify(orden);
-}
-/* Mueve una dimension un lugar arriba o abajo en el menu. */
-async function moverDim(i,paso){
-  const lista=DIMENSIONES.slice(1);
-  const j=i+paso;
-  if(j<0||j>=lista.length)return;
-  const tmp=lista[i]; lista[i]=lista[j]; lista[j]=tmp;
-  DIMENSIONES=[DIM_BASE[0]].concat(lista);
-  construir();
-  await guardarDims();
-}
-async function ordenAlfabetico(){
-  const lista=DIMENSIONES.slice(1).sort(function(a,b){ return norm(a.id).localeCompare(norm(b.id)); });
-  DIMENSIONES=[DIM_BASE[0]].concat(lista);
-  construir();
-  await api("guardarPref",{clave:"dims:orden",valor:"[]"});
-  PREFS["dims:orden"]="[]";
-  recalcDims(); construir();
 }
 async function nuevoProyecto(){
   if(PROYECTOS.length>=MAX_PROYECTOS){
@@ -1410,13 +1500,15 @@ async function nuevoProyecto(){
   recalcDims(); construir();
   await irADimension(n);
 }
-async function borrarProyectoUI(){
-  if(!PROYECTOS.length)return;
-  const n=await pedirTexto({titulo:"Eliminar proyecto",texto:"Escribe el nombre exacto del proyecto que quieres quitar. Sus tareas no se borran: pasan a General.",placeholder:PROYECTOS[0].id,ok:"Eliminar",ic:"trash"});
-  if(!n)return;
-  const p=PROYECTOS.find(function(x){ return igual(x.id,n); });
-  if(!p){ await confirmar({titulo:"No encontrado",texto:"No hay un proyecto con ese nombre.",ok:"Entendido",cancelar:"Cerrar"}); return; }
-  const si=await confirmar({titulo:"Eliminar \u201c"+p.id+"\u201d?",texto:"El proyecto desaparece del menu. Las tareas que tenia quedan visibles en General.",ok:"Eliminar",peligro:true});
+/* Elimina un proyecto directo desde su icono de basura. Sus tareas pasan a General. */
+async function borrarProyecto(id){
+  const p=PROYECTOS.find(function(x){ return igual(x.id,id); });
+  if(!p)return;
+  const si=await confirmar({
+    titulo:"Eliminar \u201c"+p.id+"\u201d?",
+    texto:"El proyecto desaparece del menu. Las tareas, listas y notas que tenia quedan visibles en General.",
+    ok:"Eliminar",peligro:true,ic:"trash"
+  });
   if(!si)return;
   PROYECTOS=PROYECTOS.filter(function(x){ return !igual(x.id,p.id); });
   DIMENSIONES=DIMENSIONES.filter(function(x){ return !igual(x.id,p.id); });
@@ -1556,6 +1648,7 @@ async function moverTarea(i,accion){
   if(SECCION_ACTUAL)abrir(SECCION_ACTUAL,true);
 }
 
+let PERSONA_DESTINO=null;
 function pintarPorPersona(cont,sec){
   const lista=sec.f();
   const grupos={};
@@ -1571,10 +1664,16 @@ function pintarPorPersona(cont,sec){
   if(!nombres.length)h+='<div class="vacio">Todavia no hay tareas con personas asignadas</div>';
   nombres.forEach(function(n){
     const g=ordenar(grupos[n]);
-    h+='<div class="bloque-tit">'+ico("user")+'&nbsp;'+esc(n)+' &middot; '+g.length+'</div>';
+    h+='<div class="bloque-tit" id="per-'+esc(norm(n)).replace(/[^a-z0-9]/g,"")+'">'+ico("user")+'&nbsp;'+esc(n)+' &middot; '+g.length+'</div>';
     g.forEach(function(t){ h+=tareaHTML(t,false); });
   });
   cont.innerHTML=h;
+  if(PERSONA_DESTINO){
+    const id="per-"+norm(PERSONA_DESTINO).replace(/[^a-z0-9]/g,"");
+    const el=document.getElementById(id);
+    if(el)setTimeout(function(){ el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.add("destello"); setTimeout(function(){ el.classList.remove("destello"); },1300); },120);
+    PERSONA_DESTINO=null;
+  }
 }
 
 /* ---------- arrastre ---------- */
@@ -1843,12 +1942,12 @@ async function pintarDashboard(cont){
   DASH=d;
 
   let h='<div class="kpis">'+
-    '<div class="kpi"><div class="n" style="color:var(--azul)">'+d.total+'</div><div class="l">Total</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--sol-os)">'+(d.pendientes+d.enProgreso+d.enPausa)+'</div><div class="l">Activas</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--ok)">'+d.completadas+'</div><div class="l">Completadas</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--coral)">'+d.vencidas+'</div><div class="l">Vencidas</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--sol-os)">'+d.venceHoy+'</div><div class="l">Vencen hoy</div></div>'+
-    '<div class="kpi"><div class="n" style="color:var(--coral)">'+d.urgentes+'</div><div class="l">Urgentes</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-total\')"><div class="n" style="color:var(--azul)">'+d.total+'</div><div class="l">Total</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-total\')"><div class="n" style="color:var(--sol-os)">'+(d.pendientes+d.enProgreso+d.enPausa)+'</div><div class="l">Activas</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-comp\')"><div class="n" style="color:var(--ok)">'+d.completadas+'</div><div class="l">Completadas</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-venc\')"><div class="n" style="color:var(--coral)">'+d.vencidas+'</div><div class="l">Vencidas</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-hoy\')"><div class="n" style="color:var(--sol-os)">'+d.venceHoy+'</div><div class="l">Vencen hoy</div></div>'+
+    '<div class="kpi kpi-link" onclick="irAFiltroDash(\'f-urg\')"><div class="n" style="color:var(--coral)">'+d.urgentes+'</div><div class="l">Urgentes</div></div>'+
     '</div>';
 
   h+='<div class="card"><h3>'+ico("list-numbers")+'Las seis del dia</h3>'+
@@ -1865,8 +1964,9 @@ async function pintarDashboard(cont){
   if(d.ranking&&d.ranking.length){
     h+='<div class="card"><h3>'+ico("users")+'Personas</h3>';
     d.ranking.forEach(function(p){
-      h+='<div class="p-row"><div class="pn">'+esc(p.persona)+'</div>'+
-         '<span class="p-tipo">'+p.abiertas+' activas</span><span class="p-tipo">'+p.completadas+' listas</span></div>';
+      h+='<div class="p-row p-link" onclick="irAPersonaActiva(\''+esc(p.persona).replace(/'/g,"\\'")+'\')"><div class="pn">'+esc(p.persona)+'</div>'+
+         '<span class="p-tipo">'+p.abiertas+' activas</span><span class="p-tipo">'+p.completadas+' listas</span>'+
+         '<span class="p-chv">'+ico("chevron-right")+'</span></div>';
     });
     h+='</div>';
   }
@@ -1901,6 +2001,13 @@ async function pintarDashboard(cont){
 }
 
 /* ---------- personas ---------- */
+/* Desde el dashboard, ir directo a un filtro de tareas (misma dimension). */
+function irAFiltroDash(idFiltro){ abrir(idFiltro); }
+/* Desde el dashboard, ir a Activas por persona y llegar directo a esa persona. */
+function irAPersonaActiva(nombre){
+  PERSONA_DESTINO=nombre;
+  abrir("f-act-per");
+}
 let PERSONA_EDIT=null;
 function pintarPersonas(cont){
   const ed = PERSONA_EDIT ? PERSONAS.find(function(x){ return Number(x.fila)===Number(PERSONA_EDIT); }) : null;
@@ -2208,7 +2315,9 @@ function pintarPomodoro(cont){
     '<div class="form-grid"><div><label>Tarea</label><select id="p-tarea">'+ops+'</select></div>'+
     '<div><label>Duracion</label><div class="dur-row">'+
       [15,25,45].map(function(m){ return '<button class="btn btn-suave" style="flex:1" onclick="pDur('+m+')">'+m+' min</button>'; }).join("")+
-    '</div></div></div>'+
+    '</div>'+
+    '<div class="dur-manual"><input type="number" id="p-man" min="1" max="240" placeholder="Otra duracion, en minutos" onkeydown="if(event.key===\'Enter\')pDurManual()">'+
+    '<button class="btn btn-suave" onclick="pDurManual()">Usar</button></div></div></div>'+
     '<div class="pomo"><div class="pomo-time" id="p-time">25:00</div>'+
     '<div id="p-ctrl"><button class="btn btn-primario" style="width:100%" onclick="pIniciar()">Comenzar</button></div></div>'+
     '<div id="p-fin" class="oculto" style="margin-top:14px"><label>Como quedo la tarea</label><div class="est-grid">'+
@@ -2219,7 +2328,14 @@ function pintarPomodoro(cont){
     '</div></div></div>';
   pResta=pTotal; pPintar();
 }
-function pDur(m){ if(pCorre)return; pTotal=m*60; pResta=pTotal; pPintar(); }
+function pDur(m){ if(pCorre)return; pTotal=m*60; pResta=pTotal; pPintar(); const i=document.getElementById("p-man"); if(i)i.value=""; }
+function pDurManual(){
+  if(pCorre)return;
+  const i=document.getElementById("p-man"); if(!i)return;
+  const m=Math.round(Number(i.value));
+  if(!m||m<1){ i.focus(); return; }
+  pTotal=Math.min(240,m)*60; pResta=pTotal; pPintar();
+}
 function pPintar(){
   const e=document.getElementById("p-time"); if(!e)return;
   e.textContent=String(Math.floor(pResta/60)).padStart(2,"0")+":"+String(pResta%60).padStart(2,"0");
